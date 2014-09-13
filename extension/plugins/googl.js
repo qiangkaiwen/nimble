@@ -43,9 +43,15 @@ var Googl = function() {
           'callback': shorten,
           'inputs': [
             {
-              'type': '$ == "url"'
+              'type': '$ == "url"',
+              'protocol': '["http", "https"].indexOf($) != -1'
             }
-          ]
+          ],
+          'output': {
+            'type': '"url"',
+            'length': '20',
+            'protocol': '"http"'
+          }
         }
       ];
     }
