@@ -16,13 +16,20 @@ var Googl = function() {
           'Content-Type': 'application/json'
         },
         'dataType': 'json',
-        'success': function(data, status) {
+        'success': function(data) {
           var retVal = {
             'type': 'url',
             'data-serialization': 'text',
             'data': data.id
           };
           resolve(retVal);
+        },
+        'error': function(data, status) {
+          // TODO: Error handling.
+          console.log('Error: ' + status);
+          reject({
+            'type': 'null'
+          });
         }
       });
     });
