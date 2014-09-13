@@ -47,7 +47,7 @@ var Twilio = function() {
           'callback': sendMessage,
           'inputs': [
             {
-              'type': '"text"',
+              'type': '($ == "text" || $ == "url")',
               'length': '$ <= 160'
             }
           ],
