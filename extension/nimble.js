@@ -67,7 +67,8 @@
 
   var plugins = [
     'Googl',
-    'Facebook'
+    'PluginFacebook',
+    'PluginDropbox'
   ];
 
   /* Creates instances of recipe workers for each entry in a recipe manifest.
