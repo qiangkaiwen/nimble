@@ -32,6 +32,7 @@
   Mousetrap.bind('n', function(e) {
     e.preventDefault();
     shown ? hideNimbleBar() : showNimbleBar();
+    this.nimble.getData(function(data) {console.log(data);});
   });
 
   Mousetrap.bind('esc', function(e) {
