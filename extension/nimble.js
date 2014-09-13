@@ -127,14 +127,22 @@
     console.log(matchResults);
     
     // Via some UI, the user decides on a recipe to apply.
-    var selectedMatch = matchResults[1];
+    var shorten = matchResults[0];
+    var sms = matchResults[1];
 
     // We apply the recipe to the data object.
     // In reality, the resultant object should be passed back to the pipeline,
     // until we reach the last stage, at which point, the result is discarded.
-    selectedMatch.callback(testObj).then(function(result) {
-      console.log(result);
+    shorten.callback(testObj).then(function(result) {
+      result.telno = '+14255022351';
+      sms.callback(result).then(function(result) {
+        console.log(result);
+        console.log('done!');
+      })
     });
+    // selectedMatch.callback(testObj).then(function(result) {
+    //   console.log(result);
+    // });
   });
 
   initialize();

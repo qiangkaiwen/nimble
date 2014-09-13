@@ -1,6 +1,6 @@
 (function() {
   if ('nimble' in this) {
-    console.log(this);
+    var that = this;
     this.nimble['objectFactories'] = {
       newNull: function() {
         return {
@@ -8,18 +8,17 @@
         };
       },
       newUrl: function(url, title) {
-        url = (url instanceof Node && url.nodeName === '#text') ? url.data : text;
+        url = (url instanceof Node && url.nodeName === '#text') ? url.data : url;
         title = (typeof title !== 'undefined' ? title : '');
         var parser = document.createElement('a');
         parser.href = url;
         var proto = parser.protocol.substring(0, parser.protocol.length - 1);
-        var nimble = this; // WTF!!!??!!!?
         return {
           'type': '"null"',
-          'data': nimble.utils.escapeString(url),
-          'title': nimble.utils.escapeString(title),
+          'data': that.nimble.utils.escapeString(url),
+          'title': that.nimble.utils.escapeString(title),
           'length': url.length,
-          'protocol': nimble.utils.escapeString(proto)
+          'protocol': that.nimble.utils.escapeString(proto)
         };
       },
       newText: function(text, title) {
@@ -37,8 +36,8 @@
         var dataUrl = that.nimble.utils.blobFromImage(domImage);
         return {
           'type': '"image"',
-          'data': nimble.utils.escapeString(dataUrl),
-          'title': nimble.utils.escapeString(title),
+          'data': that.nimble.utils.escapeString(dataUrl),
+          'title': that.nimble.utils.escapeString(title),
           'width': domImage.width,
           'height': domImage.height
         };
