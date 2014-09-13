@@ -7,7 +7,6 @@ var Googl = function() {
     var reqBody = {
       'longUrl': eval(dataObject.data)
     };
-
     return new Promise(function(resolve, reject) {
       $.ajax({
         'type': 'POST',
@@ -18,7 +17,7 @@ var Googl = function() {
         },
         'dataType': 'json',
         'success': function(data) {
-          var retVal = that.nimble.objectFactories.newUrl(data.id);
+          var retVal = that.nimble.objectFactories.newUrl(data.id, dataObject.extras);
           resolve(retVal);
         },
         'error': function(data, status) {
@@ -34,7 +33,7 @@ var Googl = function() {
     getRecipes: function() {
       return [
         {
-          'title': 'Shorten URL (goo.gl)',
+          'title': '"Shorten URL (goo.gl)"',
           'callback': shorten,
           'inputs': [
             {

@@ -62,5 +62,13 @@
         console.log('json failed');
       });
     },
+    chainPromise: function (pluginList, data) {
+      if (pluginList.length === 0) return;
+      var p = pluginList[0];
+      p.callback(data).then(function (result) {
+        nimble.chainPromise(pluginList.slice(1), result);
+      });
+    },
+
   };
 });

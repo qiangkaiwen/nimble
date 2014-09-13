@@ -7,37 +7,37 @@
           'type': '"null"'
         };
       },
-      newUrl: function(url, title) {
+      newUrl: function(url, extras) {
+        extras = (typeof extras !== 'undefined' ? extras : {'title': ''});
         url = (url instanceof Node && url.nodeName === '#text') ? url.data : url;
-        title = (typeof title !== 'undefined' ? title : '');
         var parser = document.createElement('a');
         parser.href = url;
         var proto = parser.protocol.substring(0, parser.protocol.length - 1);
         return {
           'type': '"null"',
           'data': that.nimble.utils.escapeString(url),
-          'title': that.nimble.utils.escapeString(title),
+          'extras': extras,
           'length': url.length,
           'protocol': that.nimble.utils.escapeString(proto)
         };
       },
-      newText: function(text, title) {
+      newText: function(text, extras) {
+        extras = (typeof extras !== 'undefined' ? extras : {'title': ''});
         text = ((text instanceof Node) && text.nodeName === '#text') ? text.data : text;
-        title = (typeof title !== 'undefined' ? title : '');
         return {
           'type': '"text"',
           'data': nimble.utils.escapeString(text),
-          'title': nimble.utils.escapeString(title),
+          'extras': extras,
           'length': text.length
         }
       },
-      newImage: function(domImage, title) {
-        title = (typeof title !== 'undefined' ? title : '');
+      newImage: function(domImage, extras) {
+        extras = (typeof extras !== 'undefined' ? extras : {'title': ''});
         var dataUrl = that.nimble.utils.blobFromImage(domImage);
         return {
           'type': '"image"',
           'data': that.nimble.utils.escapeString(dataUrl),
-          'title': that.nimble.utils.escapeString(title),
+          'extras': extras,
           'width': domImage.width,
           'height': domImage.height
         };
