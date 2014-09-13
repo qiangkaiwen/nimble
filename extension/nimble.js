@@ -43,7 +43,9 @@
 
     // This is a data object before it enters the current pipeline stage.
     var testObj = {
-      'type': 'text'
+      'type': 'url',
+      'data-serialization': 'text',
+      'data': 'http://www.google.com'
     };
     
     // Matching the object against the recipe manifest yields a list of
@@ -57,12 +59,13 @@
     // We apply the recipe to the data object.
     // In reality, the resultant object should be passed back to the pipeline,
     // until we reach the last stage, at which point, the result is discarded.
-    var execResult = selectedMatch.callback(testObj);
-    console.log(execResult);
+    selectedMatch.callback(testObj).then(function(result) {
+      console.log(result);
+    });
   });
 
   var plugins = [
-    'TestPlugin'
+    'Googl'
   ];
 
   /* Creates instances of recipe workers for each entry in a recipe manifest.
@@ -79,6 +82,7 @@
   };
 
   var recipes = initPlugins(plugins);
+  console.log(recipes);
   var router = Router(recipes);
   console.log('Nimble finish loading');
 
