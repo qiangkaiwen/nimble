@@ -1,8 +1,4 @@
 {
-  "http://pennappsx.challengepost.com/": [
-    {"selector": "h3", "type": "text"},
-    {"selector": "h2", "type": "text"}
-  ],
   "https://www.facebook.com/": [
     {
       "selector": "//*[@class='fwb']//text()",
