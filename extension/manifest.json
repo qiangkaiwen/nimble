@@ -22,6 +22,7 @@
         "storage.js",
         "plugins/googl.js",
         "plugins/facebook.js",
+        "plugins/twilio.js",
         "router.js",
         "core/init.js",
         "core/utils.js",
