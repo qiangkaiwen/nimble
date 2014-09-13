@@ -141,7 +141,8 @@
 
     // Matching the object against the recipe manifest yields a list of
     // compatible recipes that may be applied.
-    var matchResults = router.matchObject(selectedObj);
+    // var matchResults = router.matchObject(selectedObj);
+    var matchResults = router.matchObject(testObj);
     console.log(matchResults);
 
     // Via some UI, the user decides on a recipe to apply.
