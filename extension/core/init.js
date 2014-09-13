@@ -26,26 +26,33 @@
   return {
     dataDefaultsURL: chrome.extension.getURL('/defaults.json'),
     getData: function (callback) {
+      var nimble = this;
+
       var dataDefaultsPromise = $.getJSON(this.dataDefaultsURL, function (dataDefaults) {
         var result = [];
 
+        // Get text selection if it exists
         var textSelection = window.getSelection();
         if (textSelection.type === "Range") {
           var text = textSelection.getRangeAt(0).toString();
-          result.push(newObjectRep('text', 'Selected text', 'text', text));
+          var data = nimble.objectFactories.newText(text, 'Selected Text');
+          result.push(data);
         }
 
+        // Get domain specific data defaults
         if (document.URL in dataDefaults) {
           for (var i = 0; i < dataDefaults[document.URL].length; i++) {
             var spec = dataDefaults[document.URL][i];
             var xpathResult = getElementsByXpath(spec.selector);
             for (var elem = xpathResult.iterateNext(); elem !== null; elem = xpathResult.iterateNext()) {
-              // TODO: data-serialization
+              var data = nimble.objectFactories[spec.objectFactory](elem);
               result.push(newObjectRep(spec.type, spec.title, "text", elem.data));
             }
             // TODO: Returning a list
           }
         }
+
+        // Get current URL
         result.push(newObjectRep('text', 'Current URL', 'text', document.URL));
         callback(result);
       });

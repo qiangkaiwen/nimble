@@ -4,6 +4,11 @@
     {"selector": "h2", "type": "text"}
   ],
   "https://www.facebook.com/": [
-    {"selector": "//*[@class='fwb']//text()", "type": "text", "title": "Get Post Authors"}
+    {
+      "selector": "//*[@class='fwb']//text()",
+      "type": "text",
+      "title": "Get Post Authors",
+      "objectFactory": "newText"
+    }
   ]
 }

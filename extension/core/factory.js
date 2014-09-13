@@ -7,7 +7,7 @@
         };
       },
       newUrl: function(url, title) {
-        url = (url instanceof Node && url.nodeName === '#text') ? url.data() : text;
+        url = (url instanceof Node && url.nodeName === '#text') ? url.data : text;
         title = (typeof title !== 'undefined' ? title : '');
         var parser = document.createElement('a');
         parser.href = url;
@@ -21,7 +21,7 @@
         };
       },
       newText: function(text, title) {
-        text = (text instanceof Node && text.nodeName === '#text') ? text.data() : text;
+        text = ((text instanceof Node) && text.nodeName === '#text') ? text.data : text;
         title = (typeof title !== 'undefined' ? title : '');
         return {
           'type': '"text"',
