@@ -83,8 +83,6 @@
   };
 
   var recipes = initPlugins(plugins);
-  console.log(recipes);
   var router = Router(recipes);
   console.log('Nimble finish loading');
-
 })();

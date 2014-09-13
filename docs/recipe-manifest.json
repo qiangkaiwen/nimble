@@ -6,9 +6,11 @@
     {
       // An object containing a number of constraints.
       // If a candidate does not contain any of these fields, it doesn't match.
+      // If a candidate contains more fields than the input filter, the extra
+      // fields are ignored.
       // Otherwise, '$' is replaced by the respective value in the candidate's
-      // respective field, and the entire expression is evaluated. If all the
-      // results evaluate to 'true', the candidate matches.
+      // respective field, and the entire expression is evaluated.
+      // If all the results evaluate to 'true', the candidate matches.
       "type": "$ == \"url\"",
       "protocol": "[\"http\", \"https\"].indexOf($) != -1"  // Note expression
                                                             // syntax.
