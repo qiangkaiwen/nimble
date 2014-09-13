@@ -43,7 +43,7 @@ var Twilio = function() {
     getRecipes: function() {
       return [
         {
-          'title': 'Send as SMS',
+          'title': '"Send as SMS"',
           'callback': sendMessage,
           'inputs': [
             {

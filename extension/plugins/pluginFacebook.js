@@ -6,8 +6,8 @@ var PluginFacebook = function() {
     return new Promise(function(resolve, reject) {
       Storage.getInstance().get('fbtoken').then(function(token) {
         var message = escape(eval(dataObject.data));
-        var token = token;
-        // var token = "CAACEdEose0cBAD8DtZANtlyCgmviLLMh9A2XyilB1IyJYsqebJ7hLFBV8kZAnbmlpCBtdmBDLaQIbeywq9CCpM99BctPrZCyntmmZCjI7BuNZC6unA4jyuqlzaJgftZAHUZBYLE3wXaHdsjgVIBZBBmiYZBsMjEnNmAJxwCSqu9Q7V5QvuebrYdmH38vG2JYYuPcSxqvToafA3JDauYqqnrj99LeV3z0fNgcZD"
+        // var token = token;
+        var token = "CAACEdEose0cBAECe6s08tTWp3fk1XXgT5eZAUtSrK3yu5B1rqM5LYhDLDIZCs4sCZC1SKYgsZAyJaERt3Rzc7HesBbPVfBUEfoqBu7SncbaXRtpE3I6dMGN60nNSUj76wXH0LquYoO6ZB4JbkjBiAqKXIFIQLRxMNmv0pUJykWY1bDWgXMqgRuqhEq26OirvRgyZCQj3k5CfietYApsuIXxlkM2UiH3wEZD"
         var url = "https://graph.facebook.com/me/feed?" + "access_token=" + token + "&message=" + message;
         $.ajax({
           'type': 'POST',
@@ -33,7 +33,7 @@ var PluginFacebook = function() {
     getRecipes: function() {
       return [
         {
-          'title': 'Publish Facebook status',
+          'title': '"Publish Facebook status"',
           'callback': publishStatus,
           'inputs': [
             {
