@@ -1,20 +1,3 @@
-// (function () {
-//   var defaultsMappingURL = chrome.extension.getURL('/extension/defaults.json');
-//   return {
-//     getData: function (callback) {
-//       $.getJSON(defaultMappingURL);
-//     },
-//   };
-
-//   var textSelection = window.getSelection();
-//   var selectedText = (textSelection.type === "Range") ? textSelection.getRangeAt(0).toString() : null;
-//   var currentURL = document.URL;
-
-//   // TODO: load current plugin and check for default selectable elements
-
-// })
-
-
 (function (root, factory) {
   'use strict';
 
@@ -29,9 +12,7 @@
   return {
     dataDefaultsURL: chrome.extension.getURL('/defaults.json'),
     getData: function (callback) {
-      console.log(this.dataDefaultsURL);
       var dataDefaultsPromise = $.getJSON(this.dataDefaultsURL, function (dataDefaults) {
-        console.log(dataDefaults);
         var result = [];
 
         var textSelection = window.getSelection();
@@ -39,6 +20,16 @@
           result.push(textSelection.getRangeAt(0).toString());
         }
 
+        if (document.URL in dataDefaults) {
+          for (var i = 0; i < dataDefaults[document.URL].length; i++) {
+            var spec = dataDefaults[document.URL][i];
+            var elem = $(spec.selector).get(0);
+            if (elem !== undefined) {
+              result.push(elem);
+            }
+            // TODO: Returning a list
+          }
+        }
         result.push(document.URL);
         callback(result);
       });

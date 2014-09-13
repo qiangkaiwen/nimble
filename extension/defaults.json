@@ -1,3 +1,3 @@
 {
-  "http://www.youtube.com": ["#hello"]
+  "http://pennappsx.challengepost.com/": [{"selector": "h3", "type": "text"}, {"selector": "h2", "type": "text"}]
 }
