@@ -44,10 +44,9 @@
 
     // This is a data object before it enters the current pipeline stage.
     var testObj = {
-      'type': '"url"',
-      'data': '"http://www.google.com"',
-
-      'protocol': '"http"'
+      'type': '"text"',
+      'data': '"Meow meow meow"',
+      'telno': '"+14255022351"'
     };
     
     // Matching the object against the recipe manifest yields a list of
@@ -56,7 +55,7 @@
     console.log(matchResults);
     
     // Via some UI, the user decides on a recipe to apply.
-    var selectedMatch = matchResults[0];
+    var selectedMatch = matchResults[1];
 
     // We apply the recipe to the data object.
     // In reality, the resultant object should be passed back to the pipeline,
@@ -68,7 +67,8 @@
 
   var plugins = [
     'Googl',
-    'Facebook'
+    'Facebook',
+    'Twilio'
   ];
 
   /* Creates instances of recipe workers for each entry in a recipe manifest.
