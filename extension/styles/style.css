@@ -1,0 +1,29 @@
+#nimble-bar {
+  background-color: #ddd;
+  border: 2px solid #666;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.75);
+  display: none;
+  height: 64px;
+  left: 50%;
+  margin-left: -256px;
+  margin-top: -32px;
+  position: fixed;
+  top: 50%;
+  width: 512px;
+}
+
+#nimble-bar.visible {
+  display: inherit;
+}
+
+#nimble-bar .nimble-input {
+  background-color: transparent;
+  border: none;
+  font-size: 36px;
+  height: 100%;
+  padding: 15px;
+  width: 85%;
+}

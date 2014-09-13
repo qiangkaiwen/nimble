@@ -18,6 +18,8 @@
   ],
   "dependencies": {
     "jquery": "~2.1.1",
-    "mousetrap": "~1.4.6"
+    "mousetrap": "~1.4.6",
+    "underscore": "~1.7.0",
+    "animate.css": "~3.2.0"
   }
 }

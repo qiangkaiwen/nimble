@@ -6,20 +6,33 @@
   "description": "Enhance your web browsing experience with Nimble",
   "version": "1.0",
 
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+
   "content_scripts": [
     {
-      "matches": ["*://pennappsx.challengepost.com/*"],
+      "matches": ["*://*/*"],
       "js": [ 
         "bower_components/jquery/dist/jquery.min.js",
         "bower_components/mousetrap/mousetrap.min.js",
+        "bower_components/underscore/underscore-min.js",
+        "plugins/test-plugin.js",
+        "router.js",
         "core/init.js",
         "nimble.js"
+      ],
+      "css": [
+        "bower_components/animate.css/animate.min.css",
+        "styles/style.css"
       ]
     }
   ],
 
   "web_accessible_resources": [
     "bower_components/jquery/dist/jquery.min.map",
+    "bower_components/underscore/underscore-min.map",
     "defaults.json"
   ],
 
