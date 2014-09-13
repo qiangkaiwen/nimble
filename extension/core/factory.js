@@ -8,7 +8,7 @@
         };
       },
       newUrl: function(url, extras) {
-        extras = (typeof extras !== 'undefined' ? extras : {});
+        extras = (typeof extras !== 'undefined' ? extras : {'title': ''});
         url = (url instanceof Node && url.nodeName === '#text') ? url.data : url;
         var parser = document.createElement('a');
         parser.href = url;
@@ -22,7 +22,7 @@
         };
       },
       newText: function(text, extras) {
-        extras = (typeof extras !== 'undefined' ? extras : {});
+        extras = (typeof extras !== 'undefined' ? extras : {'title': ''});
         text = ((text instanceof Node) && text.nodeName === '#text') ? text.data : text;
         return {
           'type': '"text"',
@@ -32,7 +32,7 @@
         }
       },
       newImage: function(domImage, extras) {
-        extras = (typeof extras !== 'undefined' ? extras : {});
+        extras = (typeof extras !== 'undefined' ? extras : {'title': ''});
         var dataUrl = that.nimble.utils.blobFromImage(domImage);
         return {
           'type': '"image"',

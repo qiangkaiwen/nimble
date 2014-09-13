@@ -71,7 +71,7 @@
       }
       var input = $('.nimble-input').val();
       filteredItems = _.filter(dropdownItems, function (text) {
-        return eval(text.title).toLowerCase().indexOf(input) > -1;
+        return text.extras.title.toLowerCase().indexOf(input) > -1;
       });
       if (filteredItems.length > 0) {
         populateDropdown(filteredItems);
