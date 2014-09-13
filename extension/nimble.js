@@ -16,19 +16,25 @@
   var filteredItems;
   var selectedOptionIndex;
   var shown = false;
+  var pipeline;
   
   function initialize () {
     dropdownItems = [];
     filteredItems = [];
     selectedOptionIndex = -1;
+    pipeline = [];
   }
 
   function populateDropdown(items) {
     $('.nimble-options').html('');
+    selectedOptionIndex = -1;
     _.each(items, function (item) {
       var $nimbleOption = $('<li>');
-      $nimbleOption.html('<p>' + item.data + '</p>');
-      $('.nimble-options').append($nimbleOption);
+      var content = item.data ? item.data : item.title;
+      if (content) {
+        $nimbleOption.html('<p>' + eval(content) + '</p>');
+        $('.nimble-options').append($nimbleOption);
+      }
     })
   }
 
@@ -65,7 +71,7 @@
       }
       var input = $('.nimble-input').val();
       filteredItems = _.filter(dropdownItems, function (text) {
-        return text.data.toLowerCase().indexOf(input) > -1;
+        return eval(text.title).toLowerCase().indexOf(input) > -1;
       });
       if (filteredItems.length > 0) {
         populateDropdown(filteredItems);
@@ -116,8 +122,8 @@
 
   Mousetrap.bind('tab', function (e) {
     console.log('Nimble triggered');
+    e.preventDefault();
 
-    // This is a data object before it enters the current pipeline stage.
     // var testObj = filteredItems[selectedOptionIndex];
     var testObj = {
       'type': '"url"',
@@ -129,11 +135,15 @@
       }
     };
 
+    // var selectedObj = filteredItems[selectedOptionIndex];
+    // pipeline.push(selectedObj);
+    // console.log(pipeline)
+
     // Matching the object against the recipe manifest yields a list of
     // compatible recipes that may be applied.
-    var matchResults = router.matchObject(testObj);
+    var matchResults = router.matchObject(selectedObj);
     console.log(matchResults);
-    
+
     // Via some UI, the user decides on a recipe to apply.
     var shorten = matchResults[0];
     var sms = matchResults[1];
@@ -141,6 +151,13 @@
     // We apply the recipe to the data object.
     // In reality, the resultant object should be passed back to the pipeline,
     // until we reach the last stage, at which point, the result is discarded.
+    // dropdownItems = matchResults;
+    // filteredItems = dropdownItems;
+    // populateDropdown(dropdownItems);
+
+    // // We apply the recipe to the data object.
+    // // In reality, the resultant object should be passed back to the pipeline,
+    // // until we reach the last stage, at which point, the result is discarded.
     shorten.callback(testObj).then(function(result) {
       result.telno = '+14255022351';
       sms.callback(result).then(function(result) {
