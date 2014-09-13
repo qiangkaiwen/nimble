@@ -124,7 +124,6 @@
   Mousetrap.bind('tab', function (e) {
     e.preventDefault();
     $('.nimble-input').val('');
-    // This is a data object before it enters the current pipeline stage.
     var selectedObj = filteredItems[selectedOptionIndex];
     pipeline.push(selectedObj);
     var $nimblePipelineItem = $('<li>');
@@ -134,27 +133,22 @@
       $('.nimble-pipeline').append($nimblePipelineItem);
     }
 
-    // var testObj = filteredItems[selectedOptionIndex];
-    var testObj = {
-      'type': '"url"',
-      'data': '"http://www.qxcg.net/"',
-      'length': 20,
-      'protocol': '"http"',
-      'extras': {
-        'telno': '+14255022351'
-      }
-    };
+    // var testObj = {
+    //   'type': '"url"',
+    //   'data': '"http://www.qxcg.net/"',
+    //   'length': 20,
+    //   'protocol': '"http"',
+    //   'extras': {
+    //     'telno': '+14255022351'
+    //   }
+    // };
 
-    var selectedObj = filteredItems[selectedOptionIndex];
-    pipeline.push(selectedObj); 
-
-    // Matching the object against the recipe manifest yields a list of
-    // compatible recipes that may be applied.
-    var matchResults = router.matchObject(selectedObj);
-    // var matchResults = router.matchObject(testObj);
+    var filterCriteria = selectedObj.output !== undefined ? selectedObj.output : selectedObj;
+    var matchResults = router.matchObject(filterCriteria);
     dropdownItems = matchResults;
     filteredItems = dropdownItems;
     populateDropdown(dropdownItems);
+
     // var pluginList = [matchResults[0], matchResults[1]];
     // this.nimble.chainPromise(pluginList, testObj);
   });
