@@ -46,14 +46,14 @@
             var xpathResult = getElementsByXpath(spec.selector);
             for (var elem = xpathResult.iterateNext(); elem !== null; elem = xpathResult.iterateNext()) {
               var data = nimble.objectFactories[spec.objectFactory](elem);
-              result.push(newObjectRep(spec.type, spec.title, "text", elem.data));
+              result.push(data);
             }
             // TODO: Returning a list
           }
         }
 
         // Get current URL
-        result.push(newObjectRep('text', 'Current URL', 'text', document.URL));
+        result.push(data);
         callback(result);
       });
 
