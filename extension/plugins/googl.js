@@ -20,7 +20,7 @@ var Googl = function() {
           var retVal = {
             'type': '"url"',
             'data-serialization': '"text"',
-            'data': '"' + data.id + '"'
+            'data': Utils.escapeString(data.id)
           };
           resolve(retVal);
         },
