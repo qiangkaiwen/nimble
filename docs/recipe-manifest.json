@@ -1,0 +1,38 @@
+/* Recipe manifest.
+ * Allows the chrome extension to filter a list of installed recipes for ones
+ * compatible with the given data.
+ */
+{
+  "id": "0",  /* Unique ID */
+  "title": "Example",
+  "inputs": [
+    /* Always match type first, then match each of the fields in constraints. */
+    {
+      "type": "url",
+      "constraints": {
+        /* Exactly matches the following. */
+        "protocol": "http",
+        "hostname": "example.com",
+        "port": "8080"
+      }
+    },
+    {
+      "type": "text",
+      "constraints": {
+        "length": 160,  /* input lte this length */
+        "matches-regex": ".*"
+      }
+    },
+    {
+      "type": "image/*",
+      "constraints": {}
+    },
+    {
+      "type": "binary",
+      "constraints": {}
+    }
+  ],
+  "outputs": [
+    "null"  /* Same as input types */
+  ]
+}
