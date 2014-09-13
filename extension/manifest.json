@@ -18,6 +18,7 @@
         "bower_components/jquery/dist/jquery.min.js",
         "bower_components/mousetrap/mousetrap.min.js",
         "bower_components/underscore/underscore-min.js",
+        "bower_components/select2/select2.min.js",
         "storage.js",
         "plugins/googl.js",
         "plugins/facebook.js",
@@ -30,6 +31,7 @@
       ],
       "css": [
         "bower_components/animate.css/animate.min.css",
+        "bower_components/select2/select2.css",
         "styles/style.css"
       ]
     },
@@ -44,7 +46,8 @@
   "web_accessible_resources": [
     "bower_components/jquery/dist/jquery.min.map",
     "bower_components/underscore/underscore-min.map",
-    "defaults.json"
+    "defaults.json",
+    "bar.html"
   ],
 
   "icons": { 

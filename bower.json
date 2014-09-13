@@ -21,6 +21,7 @@
     "mousetrap": "~1.4.6",
     "underscore": "~1.7.0",
     "animate.css": "~3.2.0",
-    "bluebird": "~2.3.2"
+    "bluebird": "~2.3.2",
+    "select2": "~3.5.1"
   }
 }
