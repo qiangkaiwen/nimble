@@ -30,12 +30,9 @@
     selectedOptionIndex = -1;
     _.each(items, function (item) {
       var $nimbleOption = $('<li>');
-      var content = item.title;
-      if (content) {
-        console.log(content)
-        $nimbleOption.html('<p>' + eval(content) + '</p>');
-        $('.nimble-options').append($nimbleOption);
-      }
+      var content = item.extras.title;
+      $nimbleOption.html('<p>' + content + '</p>');
+      $('.nimble-options').append($nimbleOption);
     })
   }
 
@@ -44,9 +41,9 @@
     window.nimbleBar.addClass('visible animated bounceInUp');
     setTimeout(function (argument) {
       nimbleBar.removeClass('bounceInUp');
-      $('.nimble-input').focus();
       $('.nimble-input').val('');
       this.nimble.getData(function (data) {
+        $('.nimble-input').focus();
         dropdownItems = data;
         filteredItems = dropdownItems;
         populateDropdown(dropdownItems);
@@ -78,7 +75,9 @@
         populateDropdown(filteredItems);
       } else {
         populateDropdown([{
-          title: '"No results found"'
+          extras: {
+            title: 'No results found'
+          }
         }]);
       }
       selectedOptionIndex = -1;
@@ -130,9 +129,9 @@
     pipeline.push(selectedObj);
     console.log(pipeline);
     var $nimblePipelineItem = $('<li>');
-    var content = selectedObj.title;
+    var content = selectedObj.extras.title;
     if (content) {
-      $nimblePipelineItem.html(eval(content));
+      $nimblePipelineItem.html(content);
       $('.nimble-pipeline').append($nimblePipelineItem);
     }
 
@@ -158,30 +157,8 @@
     // var matchResults = router.matchObject(testObj);
     console.log(matchResults);
 
-    var pluginList = [matchResults[0], matchResults[1]];
-    this.nimble.chainPromise(pluginList, testObj);
-
-    // Via some UI, the user decides on a recipe to apply.
-    // var shorten = matchResults[0];
-    // var sms = matchResults[1];
-
-    // We apply the recipe to the data object.
-    // In reality, the resultant object should be passed back to the pipeline,
-    // until we reach the last stage, at which point, the result is discarded.
-    // dropdownItems = matchResults;
-    // filteredItems = dropdownItems;
-    // populateDropdown(dropdownItems);
-
-    // // We apply the recipe to the data object.
-    // // In reality, the resultant object should be passed back to the pipeline,
-    // // until we reach the last stage, at which point, the result is discarded.
-    // shorten.callback(testObj).then(function(result) {
-    //   result.telno = '+14255022351';
-    //   sms.callback(result).then(function(result) {
-    //     console.log(result);
-    //     console.log('done!');
-    //   })
-    // });
+    // var pluginList = [matchResults[0], matchResults[1]];
+    // this.nimble.chainPromise(pluginList, testObj);
   });
 
   initialize();
