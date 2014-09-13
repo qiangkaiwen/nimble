@@ -20,6 +20,7 @@
         "bower_components/underscore/underscore-min.js",
         "storage.js",
         "plugins/googl.js",
+        "plugins/facebook.js",
         "router.js",
         "core/init.js",
         "nimble.js"
