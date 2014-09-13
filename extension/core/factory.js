@@ -34,10 +34,10 @@
       },
       newImage: function(domImage, title) {
         title = (typeof title !== 'undefined' ? title : '');
-        var dataUrl = that.nimble.utils.blobFromImage(domImage);
+        var blob = that.nimble.utils.blobFromImage(domImage);
         return {
           'type': '"image"',
-          'data': nimble.utils.escapeString(dataUrl),
+          'data': blob,
           'title': nimble.utils.escapeString(title),
           'width': domImage.width,
           'height': domImage.height

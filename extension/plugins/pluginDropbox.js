@@ -1,16 +1,15 @@
 var PluginDropbox = function() {
   var that = this;
-  var client = new Dropbox.Client({key: '1c4z4rgltpwbqz5'});
   var saveToPublic = function(dataObject) {
     return new Promise(function(resolve, reject) {
       Storage.getInstance().get('dropboxtoken').then(function(token) {
         // var token = token;
-        var token = "_hKpy_YxN4EAAAAAAAAAvqAVsOT8_wNC8VILT4V8uxaPBLiWb5w8RBTd8bMRGAUg"
+        var token = "_hKpy_YxN4EAAAAAAAAAwfyJfmfCx7NR9GM8tCNh1xL16CTq9qBux-LYW1vnmv_V"
+        var client = new Dropbox.Client({key: '1c4z4rgltpwbqz5', secret: 'ekauyhaewgj8d2n', token: token});
         var buffer = dataObject.data;
-        var fileType = this.nimble.utils.imageTypeFromBlob(buffer);
-        var path = data.title + '.' + fileType;
+        var fileType = that.nimble.utils.imageTypeFromBlob(buffer);
+        var path = eval(dataObject.title) + '.' + fileType;
         client.writeFile(path, buffer, {}, function(error, stat) {
-          console.log("Stat = " + stat);
           if (null != error) {
             console.log("Error = " + error);  
             reject(that.nimble.objectFactories.newNull());
