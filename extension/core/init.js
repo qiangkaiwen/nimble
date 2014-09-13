@@ -9,6 +9,7 @@
 })(this, function () {
   'use strict';
 
+  // Helper functions
   var newObjectRep = function(type, name, dataSerialization, data) {
     return {
       "type": type,
@@ -16,6 +17,10 @@
       "data-serialization": dataSerialization,
       "data": data,
     };
+  };
+
+  var getElementsByXpath = function(path) {
+    return document.evalue(path, document, null, XPathResult.ANY_TYPE, null);
   };
 
   return {
