@@ -40,7 +40,7 @@ var TestPlugin = function() {
             }
           ]
         }
-      ]
+      ];
     }
   };
 };
