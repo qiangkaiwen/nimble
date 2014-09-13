@@ -21,6 +21,7 @@
         "utils.js",
         "storage.js",
         "plugins/googl.js",
+        "plugins/facebook.js",
         "router.js",
         "core/init.js",
         "core/factory.js",
