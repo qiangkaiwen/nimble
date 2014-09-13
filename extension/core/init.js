@@ -9,6 +9,15 @@
 })(this, function () {
   'use strict';
 
+  var newObjectRep = function(type, name, dataSerialization, data) {
+    return {
+      "type": type,
+      "name": name,
+      "data-serialization": dataSerialization,
+      "data": data,
+    };
+  };
+
   return {
     dataDefaultsURL: chrome.extension.getURL('/defaults.json'),
     getData: function (callback) {
@@ -17,7 +26,8 @@
 
         var textSelection = window.getSelection();
         if (textSelection.type === "Range") {
-          result.push(textSelection.getRangeAt(0).toString());
+          var text = textSelection.getRangeAt(0).toString();
+          result.push(newObjectRep('text', 'Selected text', 'text', text));
         }
 
         if (document.URL in dataDefaults) {
@@ -30,7 +40,7 @@
             // TODO: Returning a list
           }
         }
-        result.push(document.URL);
+        result.push(newObjectRep('text', 'Current URL', 'text', document.URL));
         callback(result);
       });
 
