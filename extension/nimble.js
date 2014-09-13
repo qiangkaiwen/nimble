@@ -23,9 +23,12 @@
     filteredItems = [];
     selectedOptionIndex = -1;
     pipeline = [];
+    $('.nimble-pipeline').html('');
+    $('.nimble-options').html('');
+    console.log('initialize')
   }
 
-  function populateDropdown(items) {
+  function populateDropdown (items) {
     $('.nimble-options').html('');
     selectedOptionIndex = -1;
     _.each(items, function (item) {
@@ -130,7 +133,7 @@
     var $nimblePipelineItem = $('<li>');
     var content = selectedObj.extras.title;
     if (content) {
-      $nimblePipelineItem.html(content);
+      $nimblePipelineItem.html('<span class="pipeline-item">' + content + '</span>');
       $('.nimble-pipeline').append($nimblePipelineItem);
     }
 
@@ -174,7 +177,7 @@
 
   /* Creates instances of recipe workers for each entry in a recipe manifest.
    */
-  var initPlugins = function(plugins) {
+  var initPlugins = function (plugins) {
     var recipes = [];
     for (var i = 0; i < plugins.length; i++) {
       var construct = plugins[i] + '()';

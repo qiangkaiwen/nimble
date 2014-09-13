@@ -38,7 +38,6 @@
           var data = nimble.objectFactories.newText(text, {'title': 'Selected Text'});
           result.push(data);
         }
-        console.log(textSelection);
 
         // Get domain specific data defaults
         if (document.URL in dataDefaults) {
