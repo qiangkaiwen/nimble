@@ -45,6 +45,7 @@
     setTimeout(function () {
       $('.nimble-input').blur();
       $('.nimble-input').val('');
+      $('.nimble-options').html('');
       nimbleBar.removeClass('visible animated bounceOutDown');
     }, 750);
   }
@@ -52,12 +53,16 @@
   function bindInputDropdown () {  
     $('.nimble-input').on('keyup', function () {
       var input = $('.nimble-input').val();
-      console.log(input);
       var filteredItems = _.filter(dropdownItems, function (text) {
         return text.data.toLowerCase().indexOf(input) > -1;
       });
-      console.log(filteredItems);
-      populateDropdown(filteredItems);
+      if (filteredItems.length > 0) {
+        populateDropdown(filteredItems);
+      } else {
+        populateDropdown([{
+          data: 'No results found'
+        }])
+      }
     });
   }
 
