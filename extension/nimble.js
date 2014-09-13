@@ -30,8 +30,9 @@
     selectedOptionIndex = -1;
     _.each(items, function (item) {
       var $nimbleOption = $('<li>');
-      var content = item.data ? item.data : item.title;
+      var content = item.title;
       if (content) {
+        console.log(content)
         $nimbleOption.html('<p>' + eval(content) + '</p>');
         $('.nimble-options').append($nimbleOption);
       }
@@ -77,7 +78,7 @@
         populateDropdown(filteredItems);
       } else {
         populateDropdown([{
-          data: 'No results found'
+          title: '"No results found"'
         }]);
       }
       selectedOptionIndex = -1;
@@ -126,7 +127,13 @@
     // This is a data object before it enters the current pipeline stage.
     var selectedObj = filteredItems[selectedOptionIndex];
     pipeline.push(selectedObj);
-    console.log(pipeline)
+    console.log(pipeline);
+    var $nimblePipelineItem = $('<li>');
+    var content = selectedObj.title;
+    if (content) {
+      $nimblePipelineItem.html(eval(content));
+      $('.nimble-pipeline').append($nimblePipelineItem);
+    }
     // Matching the object against the recipe manifest yields a list of
     // compatible recipes that may be applied.
     var matchResults = router.matchObject(selectedObj);
