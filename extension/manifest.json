@@ -13,10 +13,11 @@
 
   "content_scripts": [
     {
-      "matches": ["*://pennappsx.challengepost.com/*"],
+      "matches": ["*://*/*"],
       "js": [ 
         "bower_components/jquery/dist/jquery.min.js",
         "bower_components/mousetrap/mousetrap.min.js",
+        "bower_components/underscore/underscore-min.js",
         "nimble.js",
         "core/init.js"
       ],
@@ -27,7 +28,8 @@
   ],
 
   "web_accessible_resources": [
-    "bower_components/jquery/dist/jquery.min.map"
+    "bower_components/jquery/dist/jquery.min.map",
+    "bower_components/underscore/underscore-min.map"
   ],
 
   "icons": { 
