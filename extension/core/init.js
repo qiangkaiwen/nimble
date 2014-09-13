@@ -20,7 +20,7 @@
   };
 
   var getElementsByXpath = function(path) {
-    return document.evalue(path, document, null, XPathResult.ANY_TYPE, null);
+    return document.evaluate(path, document, null, XPathResult.ANY_TYPE, null);
   };
 
   return {
