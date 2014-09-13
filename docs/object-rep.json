@@ -1,0 +1,9 @@
+/* An object. */
+{
+  "type": "text",  /* We do a regex match on this field, so that image/.*
+                    * matches image/jpeg, image/png, etc.
+                    */
+
+  "data-serialization": "text",  /* or "base-64" */
+  "data": "hello world",  /* or base-64 string */
+}
