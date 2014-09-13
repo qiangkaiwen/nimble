@@ -62,8 +62,8 @@
   }
 
   Mousetrap.bind('n', function(e) {
-    e.preventDefault();
     if (!shown) {
+      e.preventDefault();
       showNimbleBar();
       shown = true;
     }
