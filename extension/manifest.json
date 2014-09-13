@@ -12,14 +12,15 @@
       "js": [ 
         "bower_components/jquery/dist/jquery.min.js",
         "bower_components/mousetrap/mousetrap.min.js",
-        "nimble.js",
-        "core/init.js"
+        "core/init.js",
+        "nimble.js"
       ]
     }
   ],
 
   "web_accessible_resources": [
-    "bower_components/jquery/dist/jquery.min.map"
+    "bower_components/jquery/dist/jquery.min.map",
+    "defaults.json"
   ],
 
   "icons": { 
