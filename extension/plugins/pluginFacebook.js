@@ -1,4 +1,4 @@
-var Facebook = function() {
+var PluginFacebook = function() {
   var that = this;
   /* Shortens a given URL.
    */

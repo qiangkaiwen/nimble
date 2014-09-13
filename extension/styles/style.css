@@ -58,3 +58,8 @@
 #nimble-bar .nimble-options li p {
   margin: 0;
 }
+
+#nimble-bar .nimble-options li.selected {
+  color: red;
+  font-weight: bold;
+}

@@ -13,8 +13,15 @@
   });
 
   var dropdownItems;
-
+  var selectedOptionIndex;
   var shown = false;
+  
+  function initialize () {
+    dropdownItems = [];
+    selectedOptionIndex = -1;
+  }
+
+  initialize();
 
   function populateDropdown(items) {
     $('.nimble-options').html('');
@@ -26,7 +33,7 @@
   }
 
   function showNimbleBar () {
-
+    initialize();
     window.nimbleBar.addClass('visible animated bounceInUp');
     setTimeout(function (argument) {
       nimbleBar.removeClass('bounceInUp');
@@ -45,19 +52,28 @@
     setTimeout(function () {
       $('.nimble-input').blur();
       $('.nimble-input').val('');
+      $('.nimble-options').html('');
       nimbleBar.removeClass('visible animated bounceOutDown');
     }, 750);
   }
 
   function bindInputDropdown () {  
-    $('.nimble-input').on('keyup', function () {
+    $('.nimble-input').on('keyup', function (ev) {
+      if (ev.keyCode == 38 || ev.keyCode == 40) {
+        return;
+      }
       var input = $('.nimble-input').val();
-      console.log(input);
       var filteredItems = _.filter(dropdownItems, function (text) {
         return text.data.toLowerCase().indexOf(input) > -1;
       });
-      console.log(filteredItems);
-      populateDropdown(filteredItems);
+      if (filteredItems.length > 0) {
+        populateDropdown(filteredItems);
+      } else {
+        populateDropdown([{
+          data: 'No results found'
+        }]);
+      }
+      selectedOptionIndex = -1;
     });
   }
 
@@ -73,6 +89,27 @@
     if (shown) {
       hideNimbleBar();
       shown = false;
+    }
+  });
+
+  function highlightSelectedItem (index) {
+    var options = document.querySelectorAll('.nimble-options li');
+    $(options).removeClass('selected');
+    $(options[index]).addClass('selected');
+  }
+
+  Mousetrap.bind('down', function(e) {
+    if (shown) {
+      selectedOptionIndex++;
+      highlightSelectedItem(selectedOptionIndex);
+    }
+  });
+
+  Mousetrap.bind('up', function(e) {
+    if (shown) {
+      selectedOptionIndex--;
+      selectedOptionIndex = Math.max(selectedOptionIndex, 0);
+      highlightSelectedItem(selectedOptionIndex);
     }
   });
 
@@ -113,7 +150,8 @@
 
   var plugins = [
     'Googl',
-    'Facebook',
+    'PluginFacebook',
+    'PluginDropbox',
     'Twilio'
   ];
 

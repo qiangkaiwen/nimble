@@ -19,14 +19,18 @@
         "bower_components/mousetrap/mousetrap.min.js",
         "bower_components/underscore/underscore-min.js",
         "bower_components/select2/select2.min.js",
+        "bower_components/bluebird/js/browser/bluebird.js",
+        "libs/dropbox/dropbox.min.js",
         "storage.js",
-        "plugins/googl.js",
-        "plugins/facebook.js",
-        "plugins/twilio.js",
         "router.js",
         "core/init.js",
         "core/utils.js",
         "core/factory.js",
+        "storage.js",
+        "plugins/googl.js",
+        "plugins/pluginFacebook.js",
+        "plugins/pluginDropbox.js",
+        "plugins/twilio.js",
         "nimble.js"
       ],
       "css": [
@@ -43,16 +47,17 @@
     }
   ],
 
-  "web_accessible_resources": [
-    "bower_components/jquery/dist/jquery.min.map",
-    "bower_components/underscore/underscore-min.map",
-    "defaults.json",
-    "bar.html"
-  ],
-
   "icons": { 
     // "16": "icon16.png",
     // "48": "icon48.png",
     // "128": "icon128.png" 
-  }
+  },
+
+  "web_accessible_resources": [
+    "bower_components/jquery/dist/jquery.min.map",
+    "bower_components/underscore/underscore-min.map",
+    "libs/dropbox/dropbox.min.js",
+    "defaults.json",
+    "bar.html"
+  ]
 }
