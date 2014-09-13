@@ -35,9 +35,10 @@
         var textSelection = window.getSelection();
         if (textSelection.type === "Range") {
           var text = textSelection.getRangeAt(0).toString();
-          var data = nimble.objectFactories.newText(text, 'Selected Text');
+          var data = nimble.objectFactories.newText(text, {'title': 'Selected Text'});
           result.push(data);
         }
+        console.log(textSelection);
 
         // Get domain specific data defaults
         if (document.URL in dataDefaults) {
@@ -45,15 +46,15 @@
             var spec = dataDefaults[document.URL][i];
             var xpathResult = getElementsByXpath(spec.selector);
             for (var elem = xpathResult.iterateNext(); elem !== null; elem = xpathResult.iterateNext()) {
-              var data = nimble.objectFactories[spec.objectFactory](elem);
-              result.push(newObjectRep(spec.type, spec.title, "text", elem.data));
+              var data = nimble.objectFactories[spec.objectFactory](elem, {'title': spec.title});
+              result.push(data);
             }
             // TODO: Returning a list
           }
         }
 
         // Get current URL
-        result.push(newObjectRep('text', 'Current URL', 'text', document.URL));
+        result.push(data);
         callback(result);
       });
 
@@ -62,5 +63,13 @@
         console.log('json failed');
       });
     },
+    chainPromise: function (pluginList, data) {
+      if (pluginList.length === 0) return;
+      var p = pluginList[0];
+      p.callback(data).then(function (result) {
+        nimble.chainPromise(pluginList.slice(1), result);
+      });
+    },
+
   };
 });

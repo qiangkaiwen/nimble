@@ -6,7 +6,7 @@ var Twilio = function() {
   var api_from = '+13603287227';
 
   var sendMessage = function(dataObject) {
-    if (dataObject['telno'] === undefined) {
+    if (dataObject.extras.telno === undefined) {
       console.log('Error: Twilio object didn\'t contain \'telno\'.');
       return;
     }
@@ -14,7 +14,7 @@ var Twilio = function() {
     var endpoint = 'https://api.twilio.com/2010-04-01/Accounts/' + 
                     api_account + '/Messages.json';
     var formData = {
-      'To': eval(dataObject.telno),
+      'To': dataObject.extras.telno,
       'From': api_from,
       'Body': eval(dataObject.data)
     };
@@ -28,7 +28,7 @@ var Twilio = function() {
         'password': api_secret,
         'dataType': 'json',
         'success': function(data) {
-          resolve(that.nimble.objectFactories.newText(formData.Body, dataObject.title));
+          resolve(that.nimble.objectFactories.newText(formData.Body, dataObject.extras));
         },
         'error': function(data, status) {
           // TODO: Error handling.
@@ -43,11 +43,13 @@ var Twilio = function() {
     getRecipes: function() {
       return [
         {
-          'title': 'Send as SMS',
+          'extras': {
+            'title': 'SMS via Twilio'
+          },
           'callback': sendMessage,
           'inputs': [
             {
-              'type': '"text"',
+              'type': '($ == "text" || $ == "url")',
               'length': '$ <= 160'
             }
           ],

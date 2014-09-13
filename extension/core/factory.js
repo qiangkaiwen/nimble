@@ -1,44 +1,43 @@
 (function() {
   if ('nimble' in this) {
-    console.log(this);
+    var that = this;
     this.nimble['objectFactories'] = {
       newNull: function() {
         return {
           'type': '"null"'
         };
       },
-      newUrl: function(url, title) {
-        url = (url instanceof Node && url.nodeName === '#text') ? url.data : text;
-        title = (typeof title !== 'undefined' ? title : '');
+      newUrl: function(url, extras) {
+        extras = (typeof extras !== 'undefined' ? extras : {});
+        url = (url instanceof Node && url.nodeName === '#text') ? url.data : url;
         var parser = document.createElement('a');
         parser.href = url;
         var proto = parser.protocol.substring(0, parser.protocol.length - 1);
-        var nimble = this; // WTF!!!??!!!?
         return {
           'type': '"null"',
-          'data': nimble.utils.escapeString(url),
-          'title': nimble.utils.escapeString(title),
+          'data': that.nimble.utils.escapeString(url),
+          'extras': extras,
           'length': url.length,
-          'protocol': nimble.utils.escapeString(proto)
+          'protocol': that.nimble.utils.escapeString(proto)
         };
       },
-      newText: function(text, title) {
+      newText: function(text, extras) {
+        extras = (typeof extras !== 'undefined' ? extras : {});
         text = ((text instanceof Node) && text.nodeName === '#text') ? text.data : text;
-        title = (typeof title !== 'undefined' ? title : '');
         return {
           'type': '"text"',
           'data': nimble.utils.escapeString(text),
-          'title': nimble.utils.escapeString(title),
+          'extras': extras,
           'length': text.length
         }
       },
-      newImage: function(domImage, title) {
-        title = (typeof title !== 'undefined' ? title : '');
+      newImage: function(domImage, extras) {
+        extras = (typeof extras !== 'undefined' ? extras : {});
         var blob = that.nimble.utils.blobFromImage(domImage);
         return {
           'type': '"image"',
           'data': blob,
-          'title': nimble.utils.escapeString(title),
+          'extras': extras,
           'width': domImage.width,
           'height': domImage.height
         };

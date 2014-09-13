@@ -13,21 +13,25 @@
   });
 
   var dropdownItems;
+  var filteredItems;
   var selectedOptionIndex;
   var shown = false;
+  var pipeline;
   
   function initialize () {
     dropdownItems = [];
+    filteredItems = [];
     selectedOptionIndex = -1;
+    pipeline = [];
   }
-
-  initialize();
 
   function populateDropdown(items) {
     $('.nimble-options').html('');
+    selectedOptionIndex = -1;
     _.each(items, function (item) {
       var $nimbleOption = $('<li>');
-      $nimbleOption.html('<p>' + item.data + '</p>');
+      var content = item.extras.title;
+      $nimbleOption.html('<p>' + content + '</p>');
       $('.nimble-options').append($nimbleOption);
     })
   }
@@ -37,10 +41,11 @@
     window.nimbleBar.addClass('visible animated bounceInUp');
     setTimeout(function (argument) {
       nimbleBar.removeClass('bounceInUp');
-      $('.nimble-input').focus();
       $('.nimble-input').val('');
       this.nimble.getData(function (data) {
+        $('.nimble-input').focus();
         dropdownItems = data;
+        filteredItems = dropdownItems;
         populateDropdown(dropdownItems);
       });
     }, 750);
@@ -63,14 +68,16 @@
         return;
       }
       var input = $('.nimble-input').val();
-      var filteredItems = _.filter(dropdownItems, function (text) {
-        return text.data.toLowerCase().indexOf(input) > -1;
+      filteredItems = _.filter(dropdownItems, function (text) {
+        return text.extras.title.toLowerCase().indexOf(input) > -1;
       });
       if (filteredItems.length > 0) {
         populateDropdown(filteredItems);
       } else {
         populateDropdown([{
-          data: 'No results found'
+          extras: {
+            title: 'No results found'
+          }
         }]);
       }
       selectedOptionIndex = -1;
@@ -87,6 +94,7 @@
 
   Mousetrap.bind('esc', function(e) {
     if (shown) {
+      e.preventDefault();
       hideNimbleBar();
       shown = false;
     }
@@ -98,14 +106,14 @@
     $(options[index]).addClass('selected');
   }
 
-  Mousetrap.bind('down', function(e) {
+  Mousetrap.bind('down', function (e) {
     if (shown) {
       selectedOptionIndex++;
       highlightSelectedItem(selectedOptionIndex);
     }
   });
 
-  Mousetrap.bind('up', function(e) {
+  Mousetrap.bind('up', function (e) {
     if (shown) {
       selectedOptionIndex--;
       selectedOptionIndex = Math.max(selectedOptionIndex, 0);
@@ -113,31 +121,49 @@
     }
   });
 
-  Mousetrap.bind('e', function(e) {
-    console.log('Nimble triggered');
-
+  Mousetrap.bind('tab', function (e) {
+    e.preventDefault();
+    $('.nimble-input').val('');
     // This is a data object before it enters the current pipeline stage.
+    var selectedObj = filteredItems[selectedOptionIndex];
+    pipeline.push(selectedObj);
+    var $nimblePipelineItem = $('<li>');
+    var content = selectedObj.extras.title;
+    if (content) {
+      $nimblePipelineItem.html(content);
+      $('.nimble-pipeline').append($nimblePipelineItem);
+    }
+
+    // var testObj = filteredItems[selectedOptionIndex];
     var testObj = {
-      'type': '"text"',
-      'data': '"Meow meow meow"',
-      'telno': '"+14255022351"'
+      'type': '"url"',
+      'data': '"http://www.qxcg.net/"',
+      'length': 20,
+      'protocol': '"http"',
+      'extras': {
+        'telno': '+14255022351'
+      }
     };
-    
+
+    var selectedObj = filteredItems[selectedOptionIndex];
+    pipeline.push(selectedObj); 
+
     // Matching the object against the recipe manifest yields a list of
     // compatible recipes that may be applied.
-    var matchResults = router.matchObject(testObj);
-    console.log(matchResults);
-    
-    // Via some UI, the user decides on a recipe to apply.
-    var selectedMatch = matchResults[1];
-
-    // We apply the recipe to the data object.
-    // In reality, the resultant object should be passed back to the pipeline,
-    // until we reach the last stage, at which point, the result is discarded.
-    selectedMatch.callback(testObj).then(function(result) {
-      console.log(result);
-    });
+    var matchResults = router.matchObject(selectedObj);
+    // var matchResults = router.matchObject(testObj);
+    dropdownItems = matchResults;
+    filteredItems = dropdownItems;
+    populateDropdown(dropdownItems);
+    // var pluginList = [matchResults[0], matchResults[1]];
+    // this.nimble.chainPromise(pluginList, testObj);
   });
+
+  Mousetrap.bind('enter', function (e) {
+    e.preventDefault();
+  });
+
+  initialize();
 
   var plugins = [
     'Googl',
