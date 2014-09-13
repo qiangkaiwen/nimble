@@ -12,6 +12,8 @@
       "js": [ 
         "bower_components/jquery/dist/jquery.min.js",
         "bower_components/mousetrap/mousetrap.min.js",
+        "recipes/test-recipe.js",
+        "router.js",
         "nimble.js"
       ]
     }
