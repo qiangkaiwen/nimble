@@ -1,13 +1,13 @@
 var Router = function(recipes) {
 
-  var _route = function(dataObject) {
-    var fn = eval(recipes['TestRecipe'].process);
-    return fn;
+  var _matchObject = function(dataObject) {
+    var matchedRecipes = [recipes[0]];
+    return matchedRecipes;
   };
 
   return {
-    route: function(dataObject) {
-      return _route(dataObject);
+    matchObject: function(dataObject) {
+      return _matchObject(dataObject);
     }
   };
 };

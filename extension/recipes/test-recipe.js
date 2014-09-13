@@ -1,6 +1,6 @@
 var TestRecipe = function() {
 
-  var _process = function(dataObject) {
+  var _applyTo = function(dataObject) {
     dataObject = (dataObject || {});
     dataObject['ctr'] = (dataObject['ctr'] || 0);
     dataObject['ctr'] += 1;
@@ -8,8 +8,8 @@ var TestRecipe = function() {
   };
 
   return {
-    process: function(dataObject) {
-      return _process(dataObject);
+    applyTo: function(dataObject) {
+      return _applyTo(dataObject);
     }
   };
 };
