@@ -1,5 +1,5 @@
 var Facebook = function() {
-
+  var that = this;
   /* Shortens a given URL.
    */
   var publishStatus = function(dataObject) {
@@ -17,15 +17,12 @@ var Facebook = function() {
           },
           'dataType': 'json',
           'success': function(data) {
-            var retVal = {
-              'type': '"null"'
-            };
-            resolve(retVal);
+            resolve(that.nimble.objectFactories.newNull());
           },
           'error': function(data, status) {
             // TODO: Error handling.
             console.log('Error: ' + status);
-            reject({ 'type': 'null' });
+            reject(that.nimble.objectFactories.newNull());
           }
         });
       });
