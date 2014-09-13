@@ -33,10 +33,10 @@
       },
       newImage: function(domImage, extras) {
         extras = (typeof extras !== 'undefined' ? extras : {});
-        var dataUrl = that.nimble.utils.blobFromImage(domImage);
+        var blob = that.nimble.utils.blobFromImage(domImage);
         return {
           'type': '"image"',
-          'data': that.nimble.utils.escapeString(dataUrl),
+          'data': blob,
           'extras': extras,
           'width': domImage.width,
           'height': domImage.height
