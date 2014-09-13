@@ -123,7 +123,7 @@
 
   Mousetrap.bind('tab', function (e) {
     e.preventDefault();
-
+    $('.nimble-input').val('');
     // This is a data object before it enters the current pipeline stage.
     var selectedObj = filteredItems[selectedOptionIndex];
     pipeline.push(selectedObj);
@@ -146,7 +146,7 @@
     };
 
     var selectedObj = filteredItems[selectedOptionIndex];
-    pipeline.push(selectedObj);    
+    pipeline.push(selectedObj); 
 
     // Matching the object against the recipe manifest yields a list of
     // compatible recipes that may be applied.
@@ -157,6 +157,10 @@
     populateDropdown(dropdownItems);
     // var pluginList = [matchResults[0], matchResults[1]];
     // this.nimble.chainPromise(pluginList, testObj);
+  });
+
+  Mousetrap.bind('enter', function (e) {
+    e.preventDefault();
   });
 
   initialize();
