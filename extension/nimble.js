@@ -13,15 +13,15 @@
   });
 
   var dropdownItems;
+  var filteredItems;
   var selectedOptionIndex;
   var shown = false;
   
   function initialize () {
     dropdownItems = [];
+    filteredItems = [];
     selectedOptionIndex = -1;
   }
-
-  initialize();
 
   function populateDropdown(items) {
     $('.nimble-options').html('');
@@ -41,6 +41,7 @@
       $('.nimble-input').val('');
       this.nimble.getData(function (data) {
         dropdownItems = data;
+        filteredItems = dropdownItems;
         populateDropdown(dropdownItems);
       });
     }, 750);
@@ -63,7 +64,7 @@
         return;
       }
       var input = $('.nimble-input').val();
-      var filteredItems = _.filter(dropdownItems, function (text) {
+      filteredItems = _.filter(dropdownItems, function (text) {
         return text.data.toLowerCase().indexOf(input) > -1;
       });
       if (filteredItems.length > 0) {
@@ -98,14 +99,14 @@
     $(options[index]).addClass('selected');
   }
 
-  Mousetrap.bind('down', function(e) {
+  Mousetrap.bind('down', function (e) {
     if (shown) {
       selectedOptionIndex++;
       highlightSelectedItem(selectedOptionIndex);
     }
   });
 
-  Mousetrap.bind('up', function(e) {
+  Mousetrap.bind('up', function (e) {
     if (shown) {
       selectedOptionIndex--;
       selectedOptionIndex = Math.max(selectedOptionIndex, 0);
@@ -113,35 +114,43 @@
     }
   });
 
-  Mousetrap.bind('e', function(e) {
+  Mousetrap.bind('tab', function (e) {
     console.log('Nimble triggered');
 
     // This is a data object before it enters the current pipeline stage.
-    var testObj = {
-      'type': '"text"',
-      'data': '"Meow meow meow"',
-      'telno': '"+14255022351"'
-    };
-    
+    var testObj = filteredItems[selectedOptionIndex];
+    console.log(testObj);
+
     // Matching the object against the recipe manifest yields a list of
     // compatible recipes that may be applied.
     var matchResults = router.matchObject(testObj);
     console.log(matchResults);
     
     // Via some UI, the user decides on a recipe to apply.
-    var selectedMatch = matchResults[1];
+    var shorten = matchResults[0];
+    var sms = matchResults[1];
 
     // We apply the recipe to the data object.
     // In reality, the resultant object should be passed back to the pipeline,
     // until we reach the last stage, at which point, the result is discarded.
-    selectedMatch.callback(testObj).then(function(result) {
-      console.log(result);
+    shorten.callback(testObj).then(function(result) {
+      result.telno = '+14255022351';
+      sms.callback(result).then(function(result) {
+        console.log(result);
+        console.log('done!');
+      })
     });
+    // selectedMatch.callback(testObj).then(function(result) {
+    //   console.log(result);
+    // });
   });
+
+  initialize();
 
   var plugins = [
     'Googl',
-    'Facebook',
+    'PluginFacebook',
+    'PluginDropbox',
     'Twilio'
   ];
 

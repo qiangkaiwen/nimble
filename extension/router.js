@@ -2,12 +2,13 @@ var Router = function(recipes) {
 
   var buildConstraintExpression = function(predicate, value) {
     var surroundedValue = '(' + value + ')';
-    var unpacked = predicate.replace('$', surroundedValue);
+    var unpacked = predicate.replace(/\$/g, surroundedValue);
     return unpacked;
   };
 
   var testConstraint = function(predicate, value) {
     var expression = buildConstraintExpression(predicate, value);
+    console.log(expression);
     var result = eval(expression);
     return !!result;
   };
