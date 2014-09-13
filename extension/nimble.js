@@ -13,15 +13,15 @@
   });
 
   var dropdownItems;
+  var filteredItems;
   var selectedOptionIndex;
   var shown = false;
   
   function initialize () {
     dropdownItems = [];
+    filteredItems = [];
     selectedOptionIndex = -1;
   }
-
-  initialize();
 
   function populateDropdown(items) {
     $('.nimble-options').html('');
@@ -41,6 +41,7 @@
       $('.nimble-input').val('');
       this.nimble.getData(function (data) {
         dropdownItems = data;
+        filteredItems = dropdownItems;
         populateDropdown(dropdownItems);
       });
     }, 750);
@@ -63,7 +64,7 @@
         return;
       }
       var input = $('.nimble-input').val();
-      var filteredItems = _.filter(dropdownItems, function (text) {
+      filteredItems = _.filter(dropdownItems, function (text) {
         return text.data.toLowerCase().indexOf(input) > -1;
       });
       if (filteredItems.length > 0) {
@@ -98,14 +99,14 @@
     $(options[index]).addClass('selected');
   }
 
-  Mousetrap.bind('down', function(e) {
+  Mousetrap.bind('down', function (e) {
     if (shown) {
       selectedOptionIndex++;
       highlightSelectedItem(selectedOptionIndex);
     }
   });
 
-  Mousetrap.bind('up', function(e) {
+  Mousetrap.bind('up', function (e) {
     if (shown) {
       selectedOptionIndex--;
       selectedOptionIndex = Math.max(selectedOptionIndex, 0);
@@ -113,17 +114,13 @@
     }
   });
 
-  Mousetrap.bind('e', function(e) {
+  Mousetrap.bind('tab', function (e) {
     console.log('Nimble triggered');
 
     // This is a data object before it enters the current pipeline stage.
-    var testObj = {
-      'type': '"url"',
-      'data': '"http://www.qxcg.net"',
-      'protocol': '"http"',
-      'length': '19'
-    };
-    
+    var testObj = filteredItems[selectedOptionIndex];
+    console.log(testObj);
+
     // Matching the object against the recipe manifest yields a list of
     // compatible recipes that may be applied.
     var matchResults = router.matchObject(testObj);
@@ -144,6 +141,8 @@
       })
     });
   });
+
+  initialize();
 
   var plugins = [
     'Googl',
