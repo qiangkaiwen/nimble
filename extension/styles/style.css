@@ -13,6 +13,7 @@
   position: fixed;
   top: 50%;
   width: 512px;
+  z-index: 10000;
 }
 
 #nimble-bar.visible {
