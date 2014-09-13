@@ -10,10 +10,10 @@
   'use strict';
 
   // Helper functions
-  var newObjectRep = function(type, name, dataSerialization, data) {
+  var newObjectRep = function(type, title, dataSerialization, data) {
     return {
       "type": type,
-      "name": name,
+      "title": title,
       "data-serialization": dataSerialization,
       "data": data,
     };
@@ -39,10 +39,9 @@
           for (var i = 0; i < dataDefaults[document.URL].length; i++) {
             var spec = dataDefaults[document.URL][i];
             var xpathResult = getElementsByXpath(spec.selector);
-            console.log('hello');
             for (var elem = xpathResult.iterateNext(); elem !== null; elem = xpathResult.iterateNext()) {
               // TODO: data-serialization
-              result.push(newObjectRep(spec.type, spec.name, "text", elem.data));
+              result.push(newObjectRep(spec.type, spec.title, "text", elem.data));
             }
             // TODO: Returning a list
           }
