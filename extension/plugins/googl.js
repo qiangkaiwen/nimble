@@ -17,11 +17,7 @@ var Googl = function() {
         },
         'dataType': 'json',
         'success': function(data) {
-          var retVal = {
-            'type': '"url"',
-            'data-serialization': '"text"',
-            'data': '"' + data.id + '"'
-          };
+          var retVal = Factory.newUrl(data.id);
           resolve(retVal);
         },
         'error': function(data, status) {

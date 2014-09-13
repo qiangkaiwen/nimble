@@ -18,6 +18,8 @@
         "bower_components/jquery/dist/jquery.min.js",
         "bower_components/mousetrap/mousetrap.min.js",
         "bower_components/underscore/underscore-min.js",
+        "utils.js",
+        "factory.js",
         "storage.js",
         "plugins/googl.js",
         "plugins/facebook.js",

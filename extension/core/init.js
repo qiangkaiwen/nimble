@@ -9,6 +9,7 @@
 })(this, function () {
   'use strict';
 
+  // Helper functions
   var newObjectRep = function(type, name, dataSerialization, data) {
     return {
       "type": type,
@@ -16,6 +17,10 @@
       "data-serialization": dataSerialization,
       "data": data,
     };
+  };
+
+  var getElementsByXpath = function(path) {
+    return document.evaluate(path, document, null, XPathResult.ANY_TYPE, null);
   };
 
   return {
@@ -33,9 +38,11 @@
         if (document.URL in dataDefaults) {
           for (var i = 0; i < dataDefaults[document.URL].length; i++) {
             var spec = dataDefaults[document.URL][i];
-            var elem = $(spec.selector).get(0);
-            if (elem !== undefined) {
-              result.push(elem);
+            var xpathResult = getElementsByXpath(spec.selector);
+            console.log('hello');
+            for (var elem = xpathResult.iterateNext(); elem !== null; elem = xpathResult.iterateNext()) {
+              // TODO: data-serialization
+              result.push(newObjectRep(spec.type, spec.name, "text", elem.data));
             }
             // TODO: Returning a list
           }
@@ -46,6 +53,7 @@
 
       dataDefaultsPromise.fail(function (d, textStatus, error) {
         // TODO
+        console.log('json failed');
       });
     },
   };

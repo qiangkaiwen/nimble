@@ -17,7 +17,7 @@ var Router = function(recipes) {
       var predicateName = prop.toString();
       var predicate = inputFilter[predicateName];
       
-      if (dataObject[predicateName] == undefined) {
+      if (dataObject[predicateName] === undefined) {
         return false;
       }
 
