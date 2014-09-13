@@ -8,19 +8,28 @@
   var shown = false;
 
   function showNimbleBar () {
-    nimbleBar.addClass('visible');
-    $('.nimble-input').focus();
-    $('.nimble-input').val('');
+
+    nimbleBar.addClass('visible animated bounceInUp');
     shown = true;
+    setTimeout(function (argument) {
+      nimbleBar.removeClass('bounceInUp');
+      $('.nimble-input').focus();
+      $('.nimble-input').val('');
+    }, 750);
   }
 
   function hideNimbleBar () {
-    nimbleBar.removeClass('visible');
-    $('.nimble-input').val('');
+    
+    nimbleBar.addClass('bounceOutDown');
     shown = false;
+    setTimeout(function () {
+      $('.nimble-input').blur();
+      $('.nimble-input').val('');
+      nimbleBar.removeClass('visible animated bounceOutDown');
+    }, 750);
   }
 
-  Mousetrap.bind('shift+n', function(e) {
+  Mousetrap.bind('n', function(e) {
     e.preventDefault();
     shown ? hideNimbleBar() : showNimbleBar();
   });
