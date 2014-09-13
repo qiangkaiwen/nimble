@@ -6,6 +6,11 @@
   "description": "Enhance your web browsing experience with Nimble",
   "version": "1.0",
 
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+
   "content_scripts": [
     {
       "matches": ["*://pennappsx.challengepost.com/*"],
@@ -13,6 +18,9 @@
         "bower_components/jquery/dist/jquery.min.js",
         "bower_components/mousetrap/mousetrap.min.js",
         "nimble.js"
+      ],
+      "css": [
+        "styles/style.css"
       ]
     }
   ],
