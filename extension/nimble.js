@@ -1,27 +1,47 @@
 (function () {
   
-  var nimbleBar = $('<div></div>', {id: 'nimble-bar'});
-  nimbleBar.append($('<input>', {class: 'nimble-input mousetrap'}));
-  $('body').append(nimbleBar);
-  window.nimbleBar = nimbleBar;
+  var template = chrome.extension.getURL('bar.html');
+  $.ajax({
+    url: template,
+    async: false,
+    success: function (html) {
+      var nimbleBar = $(html);
+      $('body').append(nimbleBar);
+      window.nimbleBar = nimbleBar;
+      bindInputDropdown();
+    }
+  });
+
+  var dropdownItems;
 
   var shown = false;
 
+  function populateDropdown(items) {
+    $('.nimble-options').html('');
+    _.each(items, function (item) {
+      var $nimbleOption = $('<li>');
+      $nimbleOption.html('<p>' + item.data + '</p>');
+      $('.nimble-options').append($nimbleOption);
+    })
+  }
+
   function showNimbleBar () {
 
-    nimbleBar.addClass('visible animated bounceInUp');
-    shown = true;
+    window.nimbleBar.addClass('visible animated bounceInUp');
     setTimeout(function (argument) {
       nimbleBar.removeClass('bounceInUp');
       $('.nimble-input').focus();
       $('.nimble-input').val('');
+      this.nimble.getData(function (data) {
+        dropdownItems = data;
+        populateDropdown(dropdownItems);
+      });
     }, 750);
   }
 
   function hideNimbleBar () {
     
     nimbleBar.addClass('bounceOutDown');
-    shown = false;
     setTimeout(function () {
       $('.nimble-input').blur();
       $('.nimble-input').val('');
@@ -29,14 +49,31 @@
     }, 750);
   }
 
+  function bindInputDropdown () {  
+    $('.nimble-input').on('keyup', function () {
+      var input = $('.nimble-input').val();
+      console.log(input);
+      var filteredItems = _.filter(dropdownItems, function (text) {
+        return text.data.toLowerCase().indexOf(input) > -1;
+      });
+      console.log(filteredItems);
+      populateDropdown(filteredItems);
+    });
+  }
+
   Mousetrap.bind('n', function(e) {
     e.preventDefault();
-    shown ? hideNimbleBar() : showNimbleBar();
-    this.nimble.getData(function(data) {console.log(data);});
+    if (!shown) {
+      showNimbleBar();
+      shown = true;
+    }
   });
 
   Mousetrap.bind('esc', function(e) {
-    hideNimbleBar();
+    if (shown) {
+      hideNimbleBar();
+      shown = false;
+    }
   });
 
   Mousetrap.bind('e', function(e) {
