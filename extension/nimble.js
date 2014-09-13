@@ -118,8 +118,16 @@
     console.log('Nimble triggered');
 
     // This is a data object before it enters the current pipeline stage.
-    var testObj = filteredItems[selectedOptionIndex];
-    console.log(testObj);
+    // var testObj = filteredItems[selectedOptionIndex];
+    var testObj = {
+      'type': '"url"',
+      'data': '"http://www.qxcg.net/"',
+      'length': 20,
+      'protocol': '"http"',
+      'extras': {
+        'telno': '+14255022351'
+      }
+    };
 
     // Matching the object against the recipe manifest yields a list of
     // compatible recipes that may be applied.
