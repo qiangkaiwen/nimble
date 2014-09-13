@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+
+  "name": "Nimble",
+  "short_name": "Nimble",
+  "description": "Enhance your web browsing experience with Nimble",
+  "version": "1.0",
+
+  "content_scripts": [
+    {
+      "matches": ["*://pennappsx.challengepost.com/*"],
+      "js": [ 
+        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/mousetrap/mousetrap.min.js",
+        "nimble.js"
+      ]
+    }
+  ],
+
+  "web_accessible_resources": [
+    "bower_components/jquery/dist/jquery.min.map"
+  ],
+
+  "icons": { 
+    // "16": "icon16.png",
+    // "48": "icon48.png",
+    // "128": "icon128.png" 
+  }
+}
