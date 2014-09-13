@@ -143,9 +143,6 @@
         console.log('done!');
       })
     });
-    // selectedMatch.callback(testObj).then(function(result) {
-    //   console.log(result);
-    // });
   });
 
   var plugins = [
