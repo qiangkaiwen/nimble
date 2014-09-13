@@ -4,6 +4,7 @@
                     * matches image/jpeg, image/png, etc.
                     */
 
+  "name": "Friendly Name", /* Friendly name to show in the UI */
   "data-serialization": "text",  /* or "base-64" */
   "data": "hello world",  /* or base-64 string */
 }
