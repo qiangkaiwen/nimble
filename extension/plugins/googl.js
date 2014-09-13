@@ -1,4 +1,5 @@
 var Googl = function() {
+  var that = this;
 
   /* Shortens a given URL.
    */
@@ -17,19 +18,13 @@ var Googl = function() {
         },
         'dataType': 'json',
         'success': function(data) {
-          var retVal = {
-            'type': '"url"',
-            'data-serialization': '"text"',
-            'data': Utils.escapeString(data.id)
-          };
+          var retVal = that.nimble.objectFactories.newUrl(data.id);
           resolve(retVal);
         },
         'error': function(data, status) {
           // TODO: Error handling.
           console.log('Error: ' + status);
-          reject({
-            'type': 'null'
-          });
+          reject(that.nimble.objectFactories.newNull());
         }
       });
     });

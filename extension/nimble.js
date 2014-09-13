@@ -66,7 +66,8 @@
   });
 
   var plugins = [
-    'Googl'
+    'Googl',
+    'Facebook'
   ];
 
   /* Creates instances of recipe workers for each entry in a recipe manifest.
