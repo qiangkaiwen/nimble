@@ -43,9 +43,10 @@
 
     // This is a data object before it enters the current pipeline stage.
     var testObj = {
-      'type': 'url',
-      'data-serialization': 'text',
-      'data': 'http://www.google.com'
+      'type': '"url"',
+      'data': '"http://www.google.com"',
+
+      'protocol': '"http"'
     };
     
     // Matching the object against the recipe manifest yields a list of

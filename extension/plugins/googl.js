@@ -2,9 +2,9 @@ var Googl = function() {
 
   /* Shortens a given URL.
    */
-  var _shorten = function(dataObject) {
+  var shorten = function(dataObject) {
     var reqBody = {
-      'longUrl': dataObject.data
+      'longUrl': eval(dataObject.data)
     };
 
     return new Promise(function(resolve, reject) {
@@ -18,9 +18,9 @@ var Googl = function() {
         'dataType': 'json',
         'success': function(data) {
           var retVal = {
-            'type': 'url',
-            'data-serialization': 'text',
-            'data': data.id
+            'type': '"url"',
+            'data-serialization': '"text"',
+            'data': '"' + data.id + '"'
           };
           resolve(retVal);
         },
@@ -40,12 +40,18 @@ var Googl = function() {
       return [
         {
           'title': 'Shorten URL (goo.gl)',
-          'callback': _shorten,
+          'callback': shorten,
           'inputs': [
             {
-              'type': 'url'
+              'type': '$ == "url"',
+              'protocol': '["http", "https"].indexOf($) != -1'
             }
-          ]
+          ],
+          'output': {
+            'type': '"url"',
+            'length': '20',
+            'protocol': '"http"'
+          }
         }
       ];
     }
