@@ -26,7 +26,9 @@ var PluginDropbox = function() {
     getRecipes: function() {
       return [
         {
-          title: "Save a file to Dropbox app's folder",
+          'extras': {
+            'title': 'Save to Dropbox'
+          },
           callback: saveToPublic,
           inputs: [
             {

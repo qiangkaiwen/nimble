@@ -94,6 +94,7 @@
 
   Mousetrap.bind('esc', function(e) {
     if (shown) {
+      e.preventDefault();
       hideNimbleBar();
       shown = false;
     }
@@ -121,20 +122,17 @@
   });
 
   Mousetrap.bind('tab', function (e) {
-    console.log('Nimble triggered');
     e.preventDefault();
 
     // This is a data object before it enters the current pipeline stage.
     var selectedObj = filteredItems[selectedOptionIndex];
     pipeline.push(selectedObj);
-    console.log(pipeline);
     var $nimblePipelineItem = $('<li>');
     var content = selectedObj.extras.title;
     if (content) {
       $nimblePipelineItem.html(content);
       $('.nimble-pipeline').append($nimblePipelineItem);
     }
-
 
     // var testObj = filteredItems[selectedOptionIndex];
     var testObj = {
@@ -148,15 +146,15 @@
     };
 
     var selectedObj = filteredItems[selectedOptionIndex];
-    pipeline.push(selectedObj);
-    console.log(pipeline)
+    pipeline.push(selectedObj);    
 
     // Matching the object against the recipe manifest yields a list of
     // compatible recipes that may be applied.
     var matchResults = router.matchObject(selectedObj);
     // var matchResults = router.matchObject(testObj);
-    console.log(matchResults);
-
+    dropdownItems = matchResults;
+    filteredItems = dropdownItems;
+    populateDropdown(dropdownItems);
     // var pluginList = [matchResults[0], matchResults[1]];
     // this.nimble.chainPromise(pluginList, testObj);
   });

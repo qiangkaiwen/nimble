@@ -33,7 +33,9 @@ var PluginFacebook = function() {
     getRecipes: function() {
       return [
         {
-          'title': '"Publish Facebook status"',
+          'extras': {
+            'title': 'Publish Facebook status'
+          },
           'callback': publishStatus,
           'inputs': [
             {

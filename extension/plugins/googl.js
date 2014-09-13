@@ -33,7 +33,9 @@ var Googl = function() {
     getRecipes: function() {
       return [
         {
-          'title': '"Shorten URL (goo.gl)"',
+          'extras': {
+            'title': 'Shorten URL via Googl'
+          },
           'callback': shorten,
           'inputs': [
             {
