@@ -29,6 +29,12 @@
         "bower_components/animate.css/animate.min.css",
         "styles/style.css"
       ]
+    },
+    {
+      "matches": ["*://www.youtube.com/*"],
+      "js": [
+        "youtube/youtube.js"
+      ]
     }
   ],
 
