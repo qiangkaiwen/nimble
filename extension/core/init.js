@@ -49,7 +49,6 @@
               || xpathResult.resultType === XPathResult.ORDERED_NODE_ITERATOR_TYPE) {
               for (var elem = xpathResult.iterateNext(); elem !== null; elem = xpathResult.iterateNext()) {
                 // console.log(eval(elem), elem)
-                console.log(nimble.objectFactories);
                 var data = nimble.objectFactories[spec.objectFactory](elem, {
                   'title': spec.title,
                   'value': eval(elem).data
