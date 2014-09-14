@@ -72,12 +72,14 @@
       });
 
       dataDefaultsPromise.fail(function (d, textStatus, error) {
-        // TODO
+        // TODO:
         console.log('json failed');
       });
     },
     chainPromise: function (pluginList, data, query) {
-      if (pluginList.length === 0) return;
+      if (pluginList.length === 0) {
+        return;
+      }
       var p = pluginList[0];
       p.callback(data, query).then(function (result) {
         var sliced = pluginList.slice(1);
