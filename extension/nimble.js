@@ -104,7 +104,7 @@
     });
   }
 
-  Mousetrap.bind('n', function(e) {
+  Mousetrap.bind('shift+z', function(e) {
     if (!shown) {
       e.preventDefault();
       showNimbleBar();
