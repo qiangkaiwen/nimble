@@ -50,7 +50,8 @@ var Pastebin = function() {
             }
           ],
           'output': {
-            'type': '"url"'
+            'type': '"url"',
+            'length': '30'
           }
         }
       ];
