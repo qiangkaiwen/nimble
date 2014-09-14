@@ -1,0 +1,88 @@
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.heading {
+  color: #999;
+  font-size: 32px;
+  letter-spacing: 5px;
+  line-height: 50px;
+  margin: 0;
+  text-align: center;
+}
+
+.banner {   
+  background: -webkit-linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* FF3.6+ */
+  background:     -ms-linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* IE10 */
+  background:      -o-linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* Opera 11.10+ */
+  background:         linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* W3C */
+  height: 400px;
+  text-align: center;
+}
+
+.page-banner {
+  height: 100px;
+  text-align: left;
+}
+
+.logo {
+  display: inline-block;
+  margin-bottom: 30px;
+  margin-top: 70px;
+  width: 250px;
+}
+
+.caption {
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+.landing-content {
+  text-align: center;
+}
+
+.integration-platforms {
+  padding: 0;
+}
+
+.integration-platforms li {
+  display: inline-block;
+  list-style: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.animated {
+  visibility: inherit;
+}
+
+.service-icon {
+  border-radius: 10px;
+  width: 80px;
+  margin: 10px;
+}
+
+.page-title {
+  color: #fff;
+}
+
+.accounts-list {
+  padding: 0;
+}
+
+.accounts-list li {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  list-style: none;
+}
+
+.media-heading {
+  color: #1CD8D2;
+}

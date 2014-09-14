@@ -9,8 +9,13 @@
   "permissions": [
     "activeTab",
     "storage",
+    "https://connect.facebook.net/en_US/all.js",
     "http://*/"
   ],
+
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://connect.facebook.net; object-src 'self'",     
+
+  "options_page": "options/index.html",
 
   "content_scripts": [
     {
@@ -28,6 +33,7 @@
         "core/utils.js",
         "core/factory.js",
         "storage.js",
+        "plugins/pluginBrowser.js",
         "plugins/pluginGoogl.js",
         "plugins/pluginFacebook.js",
         "plugins/pluginDropbox.js",
@@ -64,6 +70,8 @@
     "plugins/dropbox-icon.png",
     "plugins/facebook-icon.png",
     "plugins/google-icon.png",
-    "plugins/twilio-icon.png"
+    "plugins/twilio-icon.png",
+    "plugins/pastebin-icon.png",
+    "plugins/chrome-icon.png"
   ]
 }

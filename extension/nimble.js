@@ -104,7 +104,21 @@
     });
   }
 
+  // A hack to fetch tokens from localStorage to chrome.storage.local
+  function fetchTokens() {
+    _.each(['fbtoken', 'dropboxtoken'], function(key) {
+      var token = localStorage.getItem(key);
+      if (token != null) {
+        Storage.getInstance().set(key, token);
+      } 
+      Storage.getInstance().get(key).then(function (value) {
+        console.log(key + " " + value);
+      })
+    });
+  }
+
   Mousetrap.bind('shift+z', function(e) {
+    console.log('fbtoken', window.localStorage.getItem('fbtoken'));
     if (!shown) {
       e.preventDefault();
       showNimbleBar();
@@ -207,7 +221,8 @@
     'PluginFacebook',
     'PluginDropbox',
     'Twilio',
-    'Pastebin'
+    'Pastebin',
+    'Browser'
   ];
 
   /* Creates instances of recipe workers for each entry in a recipe manifest.
@@ -226,4 +241,5 @@
   var recipes = initPlugins(plugins);
   var router = Router(recipes);
   console.log('Nimble finish loading');
+  fetchTokens();
 })();

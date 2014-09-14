@@ -11,7 +11,9 @@ var Storage = (function () {
       // Public methods and variables
       set: function(key, value) {
         return new Promise(function(resolve, reject) {
-          nimbleStorage.set({key: value}, function() {
+          dataObj = {}
+          dataObj[key] = value;
+          nimbleStorage.set(dataObj, function() {
             resolve();
           });
         });
@@ -19,7 +21,7 @@ var Storage = (function () {
       get: function(key) {
         return new Promise(function(resolve, reject) {
           nimbleStorage.get(key, function(result) {
-            resolve(result.key);
+            resolve(result[key]);
           });
         });
       }
