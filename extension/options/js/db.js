@@ -24,6 +24,3 @@ function signInDropbox () {
     }
   });
 }
-
-checkStatus();
-$('.js-db-login').click(signInDropbox);

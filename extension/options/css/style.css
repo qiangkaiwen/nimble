@@ -72,3 +72,17 @@ body {
 .page-title {
   color: #fff;
 }
+
+.accounts-list {
+  padding: 0;
+}
+
+.accounts-list li {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  list-style: none;
+}
+
+.media-heading {
+  color: #1CD8D2;
+}
