@@ -23,9 +23,12 @@
     filteredItems = [];
     selectedOptionIndex = -1;
     pipeline = [];
+    $('.nimble-pipeline').html('');
+    $('.nimble-options').html('');
+    console.log('initialize')
   }
 
-  function populateDropdown(items) {
+  function populateDropdown (items) {
     $('.nimble-options').html('');
     selectedOptionIndex = -1;
     _.each(items, function (item) {
@@ -52,7 +55,7 @@
   }
 
   function hideNimbleBar () {
-    
+    $('.nimble-pipeline').empty();
     nimbleBar.addClass('bounceOutDown');
     setTimeout(function () {
       $('.nimble-input').blur();
@@ -106,10 +109,18 @@
     $(options[index]).addClass('selected');
   }
 
+  function updateInputQueryString () {
+    var selectedItem = filteredItems[selectedOptionIndex];
+    if (selectedItem && selectedItem.extras && selectedItem.title) {
+      $('.nimble-input').val(selectedItem.extras.title);
+    }
+  }
+
   Mousetrap.bind('down', function (e) {
     if (shown) {
       selectedOptionIndex++;
       highlightSelectedItem(selectedOptionIndex);
+      updateInputQueryString();
     }
   });
 
@@ -118,6 +129,7 @@
       selectedOptionIndex--;
       selectedOptionIndex = Math.max(selectedOptionIndex, 0);
       highlightSelectedItem(selectedOptionIndex);
+      updateInputQueryString();
     }
   });
 
@@ -129,7 +141,7 @@
     var $nimblePipelineItem = $('<li>');
     var content = selectedObj.extras.title;
     if (content) {
-      $nimblePipelineItem.html(content);
+      $nimblePipelineItem.html('<span class="pipeline-item">' + content + '</span>');
       $('.nimble-pipeline').append($nimblePipelineItem);
     }
 
@@ -169,7 +181,7 @@
 
   /* Creates instances of recipe workers for each entry in a recipe manifest.
    */
-  var initPlugins = function(plugins) {
+  var initPlugins = function (plugins) {
     var recipes = [];
     for (var i = 0; i < plugins.length; i++) {
       var construct = plugins[i] + '()';
