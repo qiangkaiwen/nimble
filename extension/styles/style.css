@@ -61,6 +61,11 @@
   padding-left: 10px !important;
 }
 
+#nimble-bar .nimble-options li:hover {
+  background-color: rgba(225,225,225,0.3);
+  cursor: pointer;
+}
+
 #nimble-bar .nimble-options li p {
   margin: 0;
   text-align: left;
