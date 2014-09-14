@@ -86,3 +86,11 @@ body {
 .media-heading {
   color: #1CD8D2;
 }
+
+.login-status {
+  display: none;
+}
+
+.login-status.shown {
+  display: inherit;
+}
