@@ -143,6 +143,7 @@
     var selectedObj = filteredItems[selectedOptionIndex];
 
     // Hack to inject required metadata into recipe.
+    selectedObj.queryString = '';
     if (selectedObj.extractQueryString) {
       selectedObj.queryString = $('.nimble-input').val();
     }
@@ -166,12 +167,9 @@
 
   Mousetrap.bind('enter', function (e) {
     e.preventDefault();
-
-    // Temp. hack to test execution code.
     var obj = pipeline[0];
-    obj.extras.telno = '+14255022351';
-
-    this.nimble.chainPromise(pipeline.slice(1), obj);
+    var sliced = pipeline.slice(1);
+    this.nimble.chainPromise(sliced, obj, sliced[0].queryString);
     hideNimbleBar();
     shown = false;
   });
