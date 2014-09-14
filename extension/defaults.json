@@ -28,5 +28,13 @@
   		"title": "Top News URL",
   		"objectFactory": "newUrl"
   	}
+  ],
+  "www.flickr.com": [
+    {
+      "selector": "//*[@class='pc_img ']",
+      "type": "image",
+      "title": "Flickr Image",
+      "objectFactory": "newImage"
+    }
   ]
 }
