@@ -62,11 +62,12 @@
         console.log('json failed');
       });
     },
-    chainPromise: function (pluginList, data) {
+    chainPromise: function (pluginList, data, query) {
       if (pluginList.length === 0) return;
       var p = pluginList[0];
-      p.callback(data).then(function (result) {
-        nimble.chainPromise(pluginList.slice(1), result);
+      p.callback(data, query).then(function (result) {
+        var sliced = pluginList.slice(1);
+        nimble.chainPromise(sliced, result, sliced[0].queryString);
       });
     },
 

@@ -61,6 +61,8 @@
         dropdownItems = data;
         filteredItems = dropdownItems;
         populateDropdown(dropdownItems);
+        selectedOptionIndex = 0;
+        highlightSelectedItem(selectedOptionIndex);
       });
     }, 750);
   }
@@ -88,14 +90,16 @@
       });
       if (filteredItems.length > 0) {
         populateDropdown(filteredItems);
+        selectedOptionIndex = 0;
+        highlightSelectedItem(selectedOptionIndex);
       } else {
         populateDropdown([{
           extras: {
             title: 'No results found'
           }
         }]);
+        selectedOptionIndex = -1;
       }
-      selectedOptionIndex = -1;
     });
   }
 
@@ -147,8 +151,15 @@
 
   Mousetrap.bind('tab', function (e) {
     e.preventDefault();
-    $('.nimble-input').val('');
     var selectedObj = filteredItems[selectedOptionIndex];
+
+    // Hack to inject required metadata into recipe.
+    selectedObj.queryString = '';
+    if (selectedObj.extractQueryString) {
+      selectedObj.queryString = $('.nimble-input').val();
+    }
+
+    $('.nimble-input').val('');
     pipeline.push(selectedObj);
     var $nimblePipelineItem = $('<li>');
   
@@ -176,12 +187,9 @@
 
   Mousetrap.bind('enter', function (e) {
     e.preventDefault();
-
-    // Temp. hack to test execution code.
     var obj = pipeline[0];
-    obj.extras.telno = '+14255022351';
-
-    this.nimble.chainPromise(pipeline.slice(1), obj);
+    var sliced = pipeline.slice(1);
+    this.nimble.chainPromise(sliced, obj, sliced[0].queryString);
     hideNimbleBar();
     shown = false;
   });

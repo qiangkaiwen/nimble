@@ -1,20 +1,23 @@
 var Twilio = function() {
   var that = this;
 
+  var queryRegex = /sms via twilio(: *(\+[0-9]+))?/i;
+
   var api_account = 'AC89f5d0cf0b772464c202dfe604f0b64f';
   var api_secret = '87e5302709aad6ab49de505cd29c244c';
   var api_from = '+13603287227';
 
-  var sendMessage = function(dataObject) {
-    if (dataObject.extras.telno === undefined) {
+  var sendMessage = function(dataObject, queryString) {
+    var parseResult = queryRegex.exec(queryString);
+    if (!parseResult[2]) {
       console.log('Error: Twilio object didn\'t contain \'telno\'.');
       return;
     }
-
+    var telNo = parseResult[2];
     var endpoint = 'https://api.twilio.com/2010-04-01/Accounts/' + 
                     api_account + '/Messages.json';
     var formData = {
-      'To': dataObject.extras.telno,
+      'To': telNo,
       'From': api_from,
       'Body': eval(dataObject.data)
     };
@@ -49,7 +52,7 @@ var Twilio = function() {
             'title': 'SMS via Twilio',
             'icon': 'plugins/twilio-icon.png'
           },
-          'queryPattern': /sms via twillio( to)?( [0-9]+)?/,
+          'queryPattern': queryRegex,
           'callback': sendMessage,
           'inputs': [
             {
@@ -61,9 +64,7 @@ var Twilio = function() {
             'type': '"text"',
             'length': '160'
           },
-          'requires': [
-            'telno'
-          ]
+          'extractQueryString': true
         }
       ];
     }
