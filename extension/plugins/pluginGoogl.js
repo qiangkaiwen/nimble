@@ -17,7 +17,7 @@ var Googl = function() {
         },
         'dataType': 'json',
         'success': function(data) {
-          var retVal = that.nimble.objectFactories.newUrl(data.id, dataObject.extras);
+          var retVal = that.nimble.objectFactories.newUrl(data.id, dataObject.meta);
           resolve(retVal);
         },
         'error': function(data, status) {
@@ -33,7 +33,7 @@ var Googl = function() {
     getRecipes: function() {
       return [
         {
-          'extras': {
+          'meta': {
             'type': 'recipe',
             'title': 'Shorten URL via Googl',
             'icon': 'plugins/google-icon.png'

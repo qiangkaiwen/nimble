@@ -7,8 +7,8 @@
           'type': '"null"'
         };
       },
-      newUrl: function(url, extras) {
-        extras = (typeof extras !== 'undefined' ? extras : {});
+      newUrl: function(url, meta) {
+        meta = (typeof meta !== 'undefined' ? meta : {});
         url = (url instanceof Node && url.nodeName === '#text') ? url.data : url;
         var parser = document.createElement('a');
         parser.href = url;
@@ -16,33 +16,33 @@
         return {
           'type': '"null"',
           'data': that.nimble.utils.escapeString(url),
-          'extras': extras,
+          'meta': meta,
           'length': url.length,
           'protocol': that.nimble.utils.escapeString(proto),
-          'queryPattern': new RegExp(extras.title.toLowerCase()),
+          'queryPattern': new RegExp(meta.title.toLowerCase()),
         };
       },
-      newText: function(text, extras) {
-        extras = (typeof extras !== 'undefined' ? extras : {});
+      newText: function(text, meta) {
+        meta = (typeof meta !== 'undefined' ? meta : {});
         text = ((text instanceof Node) && text.nodeName === '#text') ? text.data : text;
         return {
           'type': '"text"',
           'data': nimble.utils.escapeString(text),
-          'extras': extras,
+          'meta': meta,
           'length': text.length,
-          'queryPattern': new RegExp(extras.title.toLowerCase()),
+          'queryPattern': new RegExp(meta.title.toLowerCase()),
         }
       },
-      newImage: function(domImage, extras) {
-        extras = (typeof extras !== 'undefined' ? extras : {});
+      newImage: function(domImage, meta) {
+        meta = (typeof meta !== 'undefined' ? meta : {});
         var blob = that.nimble.utils.blobFromImage(domImage);
         return {
           'type': '"image"',
           'data': blob,
-          'extras': extras,
+          'meta': meta,
           'width': domImage.width,
           'height': domImage.height,
-          'queryPattern': new RegExp(extras.title.toLowerCase()),
+          'queryPattern': new RegExp(meta.title.toLowerCase()),
         };
       }
     };

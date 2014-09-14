@@ -35,15 +35,15 @@
       var $nimbleOption = $('<li>');
       var $img;
       var $p = $('<p>');
-      if (item.extras.type === 'recipe') {
-        console.log(item.extras.icon)
+      if (item.meta.type === 'recipe') {
+        console.log(item.meta.icon)
         $img = $('<img>', {
-          src: chrome.extension.getURL(item.extras.icon), 
+          src: chrome.extension.getURL(item.meta.icon), 
           class: 'recipe-icon'
         });
         $p.append($img);
       }
-      var content = item.extras.title;
+      var content = item.meta.title;
       $p.append('<span>' + content + '</span>');
       $nimbleOption.html($p);
       $('.nimble-options').append($nimbleOption);
@@ -86,7 +86,7 @@
       var input = $('.nimble-input').val();
       filteredItems = _.filter(dropdownItems, function (text) {
         return text.queryPattern.test(input.toLowerCase())
-        || text.extras.title.toLowerCase().indexOf(input) > -1;
+        || text.meta.title.toLowerCase().indexOf(input) > -1;
       });
       if (filteredItems.length > 0) {
         populateDropdown(filteredItems);
@@ -94,7 +94,7 @@
         highlightSelectedItem(selectedOptionIndex);
       } else {
         populateDropdown([{
-          extras: {
+          meta: {
             title: 'No results found'
           }
         }]);
@@ -127,9 +127,9 @@
 
   function updateInputQueryString () {
     var selectedItem = filteredItems[selectedOptionIndex];
-    if (selectedItem && 'extras' in selectedItem && 'title' in selectedItem.extras) {
+    if (selectedItem && 'meta' in selectedItem && 'title' in selectedItem.meta) {
       var inputPrompt = selectedItem.extractQueryString !== undefined ? ': ' : '';
-      var displayText = selectedItem.extras.title + inputPrompt;
+      var displayText = selectedItem.meta.title + inputPrompt;
       $('.nimble-input').val(displayText);
     }
   }
@@ -166,14 +166,14 @@
     var $nimblePipelineItem = $('<li>');
   
     var $content;    
-    if (selectedObj.extras.icon) {
+    if (selectedObj.meta.icon) {
       $content = $('<img>', {
-        src: chrome.extension.getURL(selectedObj.extras.icon), 
+        src: chrome.extension.getURL(selectedObj.meta.icon), 
         class: 'recipe-icon-pipeline'
       });
     } else {
       $content = $('<span>', {class: 'pipeline-item'});
-      $content.html(selectedObj.extras.title);
+      $content.html(selectedObj.meta.title);
     }
     $nimblePipelineItem.append($content);
 

@@ -32,7 +32,7 @@ var Twilio = function() {
         'dataType': 'json',
         'success': function(data) {
           resolve(that.nimble.objectFactories.newText(formData.Body,
-            dataObject.extras));
+            dataObject.meta));
         },
         'error': function(data, status) {
           // TODO: Error handling.
@@ -47,7 +47,7 @@ var Twilio = function() {
     getRecipes: function() {
       return [
         {
-          'extras': {
+          'meta': {
             'type': 'recipe',
             'title': 'SMS via Twilio',
             'icon': 'plugins/twilio-icon.png'

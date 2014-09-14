@@ -17,7 +17,7 @@ var PluginFacebook = function() {
           },
           'dataType': 'json',
           'success': function(data) {
-            resolve(that.nimble.objectFactories.newText(dataObject, dataObject.extras));
+            resolve(that.nimble.objectFactories.newText(dataObject, dataObject.meta));
           },
           'error': function(data, status) {
             // TODO: Error handling.
@@ -33,7 +33,7 @@ var PluginFacebook = function() {
     getRecipes: function() {
       return [
         {
-          'extras': {
+          'meta': {
             'type': 'recipe',
             'title': 'Publish Facebook status',
             'icon': 'plugins/facebook-icon.png'
