@@ -1,5 +1,6 @@
-body {
+html, body {
   font-family: 'Lato', sans-serif;
+  height: 100%;
 }
 
 .navbar {
@@ -56,9 +57,10 @@ body {
 
 .integration-platforms {
   background: rgba(255,255,255,0.6);
-  border-radius: 30px;
-  margin: 30px;
+  border-radius: 30px;  
+  margin: 30px auto;
   padding: 30px;
+  width: 500px;
 }
 
 .integration-platforms li {

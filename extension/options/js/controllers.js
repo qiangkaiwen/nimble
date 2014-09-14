@@ -5,7 +5,7 @@ angular.module('NimbleApp')
       var that = this;
       (function (delay) {
         setTimeout(function () {
-          $(that).addClass('animated bounceInUp');
+          $(that).addClass('animated fadeInUp');
         }, delay * 300);
       })(t);
       t += 1;
