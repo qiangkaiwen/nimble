@@ -32,7 +32,7 @@
   height: 100% !important;
   outline: none !important;
   padding: 15px !important;
-  width: 85% !important;
+  width: 100% !important;
 }
 
 #nimble-bar .nimble-options-container {
@@ -55,13 +55,14 @@
 
 #nimble-bar .nimble-options li {
   border-bottom: 1px solid #eee;
-  font-size: 24px;
-  list-style: none;
-  padding: 5px;
+  font-size: 24px !important;
+  list-style: none !important;
+  padding: 5px !important;
 }
 
 #nimble-bar .nimble-options li p {
   margin: 0;
+  text-align: left;
 }
 
 #nimble-bar .nimble-options li.selected {
