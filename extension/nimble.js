@@ -106,7 +106,7 @@
 
   // A hack to fetch tokens from localStorage to chrome.storage.local
   function fetchTokens() {
-    _.each(['fbtoken', 'dropboxtoken'], function(key) {
+    _.each(['fbtoken', 'dropboxtoken', 'livetoken'], function(key) {
       var token = localStorage.getItem(key);
       if (token != null) {
         Storage.getInstance().set(key, token);
