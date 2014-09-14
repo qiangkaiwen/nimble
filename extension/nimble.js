@@ -140,15 +140,14 @@
 
   Mousetrap.bind('tab', function (e) {
     e.preventDefault();
-    $('.nimble-input').val('');
     var selectedObj = filteredItems[selectedOptionIndex];
-    console.log(selectedObj);
 
+    // Hack to inject required metadata into recipe.
     if (selectedObj.extractQueryString) {
-      selectedObj.queryString = $('.nimble-input').val();  // TODO:
-      console.log(selectedObj);
+      selectedObj.queryString = $('.nimble-input').val();
     }
 
+    $('.nimble-input').val('');
     pipeline.push(selectedObj);
     var $nimblePipelineItem = $('<li>');
     var content = selectedObj.extras.title;
