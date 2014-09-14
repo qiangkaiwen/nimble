@@ -55,7 +55,7 @@
   }
 
   function hideNimbleBar () {
-    
+    $('.nimble-pipeline').empty();
     nimbleBar.addClass('bounceOutDown');
     setTimeout(function () {
       $('.nimble-input').blur();
