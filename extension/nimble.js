@@ -140,7 +140,7 @@
 
   Mousetrap.bind('tab', function (e) {
     e.preventDefault();
-    var selectedObj = filteredItems[selectedOptionIndex];
+    var selectedObj = $.extend(true, {}, filteredItems[selectedOptionIndex]);
 
     // Hack to inject required metadata into recipe.
     selectedObj.queryString = '';
