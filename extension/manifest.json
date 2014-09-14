@@ -50,9 +50,9 @@
   ],
 
   "icons": { 
-    // "16": "icon16.png",
-    // "48": "icon48.png",
-    // "128": "icon128.png" 
+    "16": "icons/nimble-icon-16.png",
+    "48": "icons/nimble-icon-48.png",
+    "128": "icons/nimble-icon-128.png"
   },
 
   "web_accessible_resources": [
