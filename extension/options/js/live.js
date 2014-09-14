@@ -20,8 +20,16 @@
 
   var hashToken = location.hash.substring(1);
   if (hashToken) {
+    console.log('Found a hash.')
     var params = unpackParamString(location.hash.substring(1));
-    storeToken('livetoken', params.access_token);
+    if (params.access_token) {
+      console.log('Live Auth token detected.');
+      storeToken('livetoken', params.access_token);
+    } else {
+      console.log('Live Auth token not found.');
+    }
+  } else {
+    console.log('Hash not found.');
   }
  redirectMain();
 })();
