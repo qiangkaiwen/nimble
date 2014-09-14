@@ -36,6 +36,7 @@ var Googl = function() {
           'extras': {
             'title': 'Shorten URL via Googl'
           },
+          'queryPattern': /shorten/,
           'callback': shorten,
           'inputs': [
             {

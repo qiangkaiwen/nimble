@@ -46,6 +46,7 @@ var Twilio = function() {
           'extras': {
             'title': 'SMS via Twilio'
           },
+          'queryPattern': /sms via twillio( to)?( [0-9]+)?/,
           'callback': sendMessage,
           'inputs': [
             {
