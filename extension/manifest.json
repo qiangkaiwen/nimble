@@ -28,10 +28,10 @@
         "core/utils.js",
         "core/factory.js",
         "storage.js",
-        "plugins/googl.js",
+        "plugins/pluginGoogl.js",
         "plugins/pluginFacebook.js",
         "plugins/pluginDropbox.js",
-        "plugins/twilio.js",
+        "plugins/pluginTwilio.js",
         "nimble.js"
       ],
       "css": [

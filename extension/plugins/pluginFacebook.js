@@ -17,7 +17,7 @@ var PluginFacebook = function() {
           },
           'dataType': 'json',
           'success': function(data) {
-            resolve(that.nimble.objectFactories.newNull());
+            resolve(that.nimble.objectFactories.newText(dataObject, dataObject.extras));
           },
           'error': function(data, status) {
             // TODO: Error handling.
@@ -44,7 +44,7 @@ var PluginFacebook = function() {
             }
           ],
           'output': {
-            'type': '"null"'
+            'type': '"text"'
           }
         }
       ];
