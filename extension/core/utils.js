@@ -30,32 +30,24 @@
         return new Blob([uInt8Array], {type: contentType});
       },
       blobFromImage: function(img) {
-        // console.log(img.width, img.height);
         var canvas = document.createElement('canvas');
         canvas.width = img.width;
         canvas.height = img.height;
         var context = canvas.getContext('2d');
         context.drawImage(img, 0, 0);
         var dataURL = canvas.toDataURL();
-        console.log(dataURL);
+        canvas = null;
         return this.dataURLToBlob(dataURL);
       },
       blobFromURL: function(url) {
+        var self = this;
         return new Promise(function(resolve, reject) {
-          var xhr = new XMLHttpRequest();
-          xhr.onreadystatechange = function(){
-            if (this.readyState == 4) {
-              if (this.status == 200) {
-                console.log(this.response, typeof this.response);
-                resolve(this.response);
-              } else {
-                reject({'Error': 'Cannot get blob from url'});
-              }
-            }
+          var img = new Image();
+          img.onload = function() {
+            var res = self.blobFromImage(img);
+            resolve(res);
           }
-          xhr.open('GET', url);
-          xhr.responseType = 'blob';
-          xhr.send();
+          img.src = url;
         });
       },
       imageTypeFromBlob: function(blob) {

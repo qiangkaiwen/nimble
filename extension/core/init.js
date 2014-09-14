@@ -49,8 +49,6 @@
             if (xpathResult.resultType === XPathResult.UNORDERED_NODE_ITERATOR_TYPE
               || xpathResult.resultType === XPathResult.ORDERED_NODE_ITERATOR_TYPE) {
               for (var elem = xpathResult.iterateNext(); elem !== null; elem = xpathResult.iterateNext()) {
-                // console.log(eval(elem), elem)
-                console.log(nimble.objectFactories);
                 var value;
                 if (spec.type === 'image') {
                   value = eval(elem).alt;

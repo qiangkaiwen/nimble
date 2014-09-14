@@ -36,9 +36,7 @@
       },
       newImage: function(domImage, meta) {
         meta = (typeof meta !== 'undefined' ? meta : {});
-        console.log(meta);
-        // var blob = that.nimble.utils.blobFromImage(domImage);
-        var blob = domImage.url;
+        var blob = domImage.src;
         return {
           'type': '"image"',
           'data': blob,

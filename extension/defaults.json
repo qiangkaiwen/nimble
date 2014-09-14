@@ -29,7 +29,7 @@
   		"objectFactory": "newUrl"
   	}
   ],
-  "https://www.flickr.com/explore": [
+  "www.flickr.com": [
     {
       "selector": "//*[@class='pc_img ']",
       "type": "image",
