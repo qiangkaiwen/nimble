@@ -206,7 +206,8 @@
     'Googl',
     'PluginFacebook',
     'PluginDropbox',
-    'Twilio'
+    'Twilio',
+    'Pastebin'
   ];
 
   /* Creates instances of recipe workers for each entry in a recipe manifest.

@@ -32,6 +32,7 @@
         "plugins/pluginFacebook.js",
         "plugins/pluginDropbox.js",
         "plugins/pluginTwilio.js",
+        "plugins/pluginPastebin.js",
         "nimble.js"
       ],
       "css": [

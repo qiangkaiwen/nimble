@@ -69,5 +69,5 @@ var Twilio = function() {
         }
       ];
     }
-  }
+  };
 };
