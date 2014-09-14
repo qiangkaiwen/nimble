@@ -16,13 +16,7 @@ var PluginFacebook = function() {
           },
           'dataType': 'json',
           'success': function(data) {
-            if (data.type === "url") {
-                resolve(that.nimble.objectFactories.newUrl(formData.Body,
-                  dataObject.meta));
-            } else if (data.type === "text") {
-            resolve(that.nimble.objectFactories.newText(formData.Body,
-              dataObject.meta));
-          }
+              resolve(that.nimble.objectFactories.newText(dataObject.data, dataObject.meta));
           },
           'error': function(data, status) {
             // TODO: Error handling.

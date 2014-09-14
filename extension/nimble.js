@@ -43,7 +43,7 @@
       var $img;
       var $p = $('<p>');
       if (item.meta.type === 'recipe') {
-        console.log(item.meta.icon)
+        // console.log(item.meta.icon)
         $img = $('<img>', {
           src: chrome.extension.getURL(item.meta.icon), 
           class: 'recipe-icon'
@@ -191,7 +191,7 @@
     var $nimblePipelineItem = $('<li>');
   
     var $content;
-    console.log(selectedObj);
+    // console.log(selectedObj);
     if (selectedObj.meta.icon) {
       $content = $('<img>', {
         src: chrome.extension.getURL(selectedObj.meta.icon), 
@@ -207,9 +207,9 @@
 
     var filterCriteria = selectedObj.output !== undefined ?
       selectedObj.output : selectedObj;
-    console.log(filterCriteria);
+    // console.log(filterCriteria);
     var matchResults = router.matchObject(filterCriteria);
-    console.log(matchResults);
+    // console.log(matchResults);
     dropdownItems = matchResults;
     filteredItems = dropdownItems;
     populateDropdown(dropdownItems);
@@ -224,7 +224,7 @@
     e.preventDefault();
     var obj = pipeline[0];
     var sliced = pipeline.slice(1);
-    console.log(sliced);
+    // console.log(sliced);
     this.nimble.chainPromise(sliced, obj, sliced[0].queryString);
     hideNimbleBar();
     shown = false;
