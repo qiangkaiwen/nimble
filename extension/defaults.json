@@ -16,9 +16,9 @@
   	},
   	{
   		"selector": "string(//*[@class='L4'][1]/a/text())",
-  		"type": "url",
+  		"type": "text",
   		"title": "Top News Headlines",
-  		"objectFactory": "newUrl"
+  		"objectFactory": "newText"
   	}
   ]
 }
