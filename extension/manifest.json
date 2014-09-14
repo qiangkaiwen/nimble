@@ -39,6 +39,7 @@
         "plugins/pluginDropbox.js",
         "plugins/pluginTwilio.js",
         "plugins/pluginPastebin.js",
+        "plugins/pluginOneNote.js",
         "nimble.js"
       ],
       "css": [
