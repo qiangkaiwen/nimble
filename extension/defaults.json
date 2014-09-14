@@ -20,5 +20,13 @@
   		"title": "Top News Headlines",
   		"objectFactory": "newUrl"
   	}
+  ],
+  "https://www.flickr.com/explore": [
+    {
+      "selector": "//*[@class='pc_img ']",
+      "type": "image",
+      "title": "Flickr Image",
+      "objectFactory": "newImage"
+    }
   ]
 }

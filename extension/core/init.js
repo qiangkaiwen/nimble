@@ -50,9 +50,15 @@
               for (var elem = xpathResult.iterateNext(); elem !== null; elem = xpathResult.iterateNext()) {
                 // console.log(eval(elem), elem)
                 console.log(nimble.objectFactories);
+                var value;
+                if (spec.type === 'image') {
+                  value = eval(elem).alt;
+                } else {
+                  value = eval(elem).data;
+                }
                 var data = nimble.objectFactories[spec.objectFactory](elem, {
                   'title': spec.title,
-                  'value': eval(elem).data
+                  'value': value
                 });
                 result.push(data);
               }

@@ -40,6 +40,24 @@
         console.log(dataURL);
         return this.dataURLToBlob(dataURL);
       },
+      blobFromURL: function(url) {
+        return new Promise(function(resolve, reject) {
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function(){
+            if (this.readyState == 4) {
+              if (this.status == 200) {
+                console.log(this.response, typeof this.response);
+                resolve(this.response);
+              } else {
+                reject({'Error': 'Cannot get blob from url'});
+              }
+            }
+          }
+          xhr.open('GET', url);
+          xhr.responseType = 'blob';
+          xhr.send();
+        });
+      },
       imageTypeFromBlob: function(blob) {
         return blob.type.substring(6);
       }
