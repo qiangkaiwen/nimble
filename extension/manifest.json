@@ -59,6 +59,10 @@
     "bower_components/underscore/underscore-min.map",
     "libs/dropbox/dropbox.min.js",
     "defaults.json",
-    "bar.html"
+    "bar.html",
+    "plugins/dropbox-icon.png",
+    "plugins/facebook-icon.png",
+    "plugins/google-icon.png",
+    "plugins/twilio-icon.png"
   ]
 }

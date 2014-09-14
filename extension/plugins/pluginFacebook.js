@@ -34,7 +34,9 @@ var PluginFacebook = function() {
       return [
         {
           'extras': {
-            'title': 'Publish Facebook status'
+            'type': 'recipe',
+            'title': 'Publish Facebook status',
+            'icon': 'plugins/facebook-icon.png'
           },
           'queryPattern': /publish facebook status/,
           'callback': publishStatus,

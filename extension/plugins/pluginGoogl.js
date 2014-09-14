@@ -34,7 +34,9 @@ var Googl = function() {
       return [
         {
           'extras': {
-            'title': 'Shorten URL via Googl'
+            'type': 'recipe',
+            'title': 'Shorten URL via Googl',
+            'icon': 'plugins/google-icon.png'
           },
           'queryPattern': /shorten/,
           'callback': shorten,
