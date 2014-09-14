@@ -2,6 +2,7 @@
   if ('nimble' in this) {
     this.nimble['utils'] = {
       escapeString: function(data) {
+        console.log(data);
         var escaped = data.replace(/"/g, '\\"');
         var encapsulated = '"' + escaped + '"';
         return encapsulated;

@@ -31,8 +31,8 @@ var Twilio = function() {
         'password': api_secret,
         'dataType': 'json',
         'success': function(data) {
-          resolve(that.nimble.objectFactories.newText(formData.Body,
-            dataObject.meta));
+            resolve(that.nimble.objectFactories.newText(formData.Body,
+              dataObject.meta));
         },
         'error': function(data, status) {
           // TODO: Error handling.

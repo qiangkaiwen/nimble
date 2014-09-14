@@ -2,7 +2,7 @@ var Pastebin = function() {
   var that = this;
 
   var apiEndpoint = 'http://pastebin.com/api/api_post.php';
-  var apiKey = '3a4ec35e9d8d0ec368a70ef0cbedbaee';
+  var apiKey = '858def7f43eb9f74c0f1cdc86f2e24f0';
   var apiOption = 'paste';
 
   var submitPaste = function(dataObject) {
