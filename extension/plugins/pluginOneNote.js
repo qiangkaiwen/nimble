@@ -1,29 +1,3 @@
-var = OneDrive = function () {
-	var headString = '
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Nimble Note</title>
-    <meta name="created" content="2013-06-11T12:45:00.000-8:00"/>
-  </head>
-  <body>
-    <p>';
-
-	var footerString = '</p>
-  </body>
-</html>
-	';
-
-	var postHTML = function (dataObject) {
-		var doc = headString + dataObject + footerString;
-
-	};
-
-	return {
-		'callback': postHTML,
-	};
-};
-
 var OneNote = function () {
   var headString = '
 <!DOCTYPE html>
@@ -68,7 +42,28 @@ var OneNote = function () {
     });
   };
 
-  return {
-    'callback': postHTML,
+return {
+    getRecipes: function() {
+      return [
+        {
+          'meta': {
+            'type': 'recipe',
+            'title': 'OneNote',
+            'value': 'Post in OneNote',
+            'icon': 'plugins/onenote-icon.png'
+          },
+          'queryPattern': /post in onenote/,
+          'callback': postHTML,
+          'inputs': [
+            {
+              'type': '($ == "text" || $ == "url")'
+            }
+          ],
+          'output': {
+            'type': '"text"'
+          }
+        }
+      ];
+    }
   };
 };
