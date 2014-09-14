@@ -13,7 +13,8 @@ angular.module('NimbleApp')
   }])
   .controller('AccountsCtrl', ['$scope', function ($scope) {
     $('.js-fb-login').click(signInFacebook);
-    checkStatus();
     $('.js-db-login').click(signInDropbox);
+    checkDropboxStatus();
     $('.js-live-login').click(signInWindowsLive);
+    checkWindowsLiveStatus();
   }]);

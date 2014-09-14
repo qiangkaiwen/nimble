@@ -1,11 +1,5 @@
-var client = new Dropbox.Client({key: '1c4z4rgltpwbqz5', secret: 'ekauyhaewgj8d2n'});
-
-function checkStatus() {
+function checkDropboxStatus() {
   if (localStorage.getItem('dropboxtoken') != null) {
-    $('#db-login-status').text('You have logined to Dropbox.');
-    $('.js-db-login').hide();
-  } else if (client.isAuthenticated()) {
-    localStorage.setItem('dropboxtoken', client.credentials().token);
     $('#db-login-status').text('You have logined to Dropbox.');
     $('.js-db-login').hide();
   } else {
@@ -15,12 +9,6 @@ function checkStatus() {
 }
 
 function signInDropbox () {
-  client.authenticate({ interactive: false }, function (error, c) {
-    if (error) {
-      console.log('Error: ' + error);
-    } else {
-      client = c;
-      checkStatus();
-    }
-  });
+  console.log("HERE");
+  location.href = 'https://www.dropbox.com/1/oauth2/authorize?client_id=1c4z4rgltpwbqz5&response_type=token&redirect_uri=http://localhost:8000/db_redirect.html';
 }
