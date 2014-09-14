@@ -8,7 +8,6 @@ var Router = function(recipes) {
 
   var testConstraint = function(predicate, value) {
     var expression = buildConstraintExpression(predicate, value);
-    console.log(expression);
     var result = eval(expression);
     return !!result;
   };

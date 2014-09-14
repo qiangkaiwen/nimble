@@ -14,7 +14,7 @@ var PluginDropbox = function() {
             console.log("Error = " + error);
             reject(that.nimble.objectFactories.newNull());
           } else {
-            resolve(that.nimble.objectFactories.newImage(dataObject, dataObject.extras));
+            resolve(that.nimble.objectFactories.newImage(dataObject, dataObject.meta));
           }
         });
       });
@@ -25,8 +25,11 @@ var PluginDropbox = function() {
     getRecipes: function() {
       return [
         {
-          'extras': {
-            'title': 'Save to Dropbox'
+          'meta': {
+            'type': 'recipe',
+            'title': 'Dropbox',
+            'value': 'Save image to Dropbox',
+            'icon': 'plugins/dropbox-icon.png'
           },
           'queryPattern': /save to dropbox/,
           'callback': saveToPublic,

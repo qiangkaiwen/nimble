@@ -33,8 +33,19 @@
     selectedOptionIndex = -1;
     _.each(items, function (item) {
       var $nimbleOption = $('<li>');
-      var content = item.extras.title;
-      $nimbleOption.html('<p>' + content + '</p>');
+      var $img;
+      var $p = $('<p>');
+      if (item.meta.type === 'recipe') {
+        console.log(item.meta.icon)
+        $img = $('<img>', {
+          src: chrome.extension.getURL(item.meta.icon), 
+          class: 'recipe-icon'
+        });
+        $p.append($img);
+      }
+      $p.append('<span class="nimble-title">' + item.meta.title + '</span>');
+      $p.append('<span class="nimble-value">' + item.meta.value + '</span>');
+      $nimbleOption.html($p);
       $('.nimble-options').append($nimbleOption);
     })
   }
@@ -50,6 +61,8 @@
         dropdownItems = data;
         filteredItems = dropdownItems;
         populateDropdown(dropdownItems);
+        selectedOptionIndex = 0;
+        highlightSelectedItem(selectedOptionIndex);
       });
     }, 750);
   }
@@ -72,19 +85,22 @@
       }
       var input = $('.nimble-input').val();
       filteredItems = _.filter(dropdownItems, function (text) {
-        return text.queryPattern.test(input.toLowerCase())
-        || text.extras.title.toLowerCase().indexOf(input) > -1;
+        return text.queryPattern.test(input.toLowerCase()) || 
+                [text.meta.title, text.meta.value].join(' ').toLowerCase().indexOf(input) > -1;
       });
       if (filteredItems.length > 0) {
         populateDropdown(filteredItems);
+        selectedOptionIndex = 0;
+        highlightSelectedItem(selectedOptionIndex);
       } else {
         populateDropdown([{
-          extras: {
-            title: 'No results found'
+          meta: {
+            title: 'No results found',
+            value: 'Try another query'
           }
         }]);
+        selectedOptionIndex = -1;
       }
-      selectedOptionIndex = -1;
     });
   }
 
@@ -126,8 +142,10 @@
 
   function updateInputQueryString () {
     var selectedItem = filteredItems[selectedOptionIndex];
-    if (selectedItem && 'extras' in selectedItem && 'title' in selectedItem.extras) {
-      $('.nimble-input').val(selectedItem.extras.title);
+    if (selectedItem && 'meta' in selectedItem && 'title' in selectedItem.meta) {
+      var inputPrompt = selectedItem.extractQueryString !== undefined ? ': ' : '';
+      var displayText = selectedItem.meta.title + inputPrompt;
+      $('.nimble-input').val(displayText);
     }
   }
 
@@ -150,19 +168,37 @@
 
   Mousetrap.bind('tab', function (e) {
     e.preventDefault();
+    var selectedObj = $.extend(true, {}, filteredItems[selectedOptionIndex]);
+
+    // Hack to inject required metadata into recipe.
+    selectedObj.queryString = '';
+    if (selectedObj.extractQueryString) {
+      selectedObj.queryString = $('.nimble-input').val();
+    }
+
     $('.nimble-input').val('');
-    var selectedObj = filteredItems[selectedOptionIndex];
     pipeline.push(selectedObj);
     var $nimblePipelineItem = $('<li>');
-    var content = selectedObj.extras.title;
-    if (content) {
-      $nimblePipelineItem.html('<span class="pipeline-item">' + content + '</span>');
-      $('.nimble-pipeline').append($nimblePipelineItem);
+  
+    var $content;    
+    if (selectedObj.meta.icon) {
+      $content = $('<img>', {
+        src: chrome.extension.getURL(selectedObj.meta.icon), 
+        class: 'recipe-icon-pipeline'
+      });
+    } else {
+      $content = $('<span>', {class: 'pipeline-item'});
+      $content.html(selectedObj.meta.title);
     }
-    
+    $nimblePipelineItem.append($content);
+
+    $('.nimble-pipeline').append($nimblePipelineItem);
+
     var filterCriteria = selectedObj.output !== undefined ?
       selectedObj.output : selectedObj;
+    console.log(filterCriteria);
     var matchResults = router.matchObject(filterCriteria);
+    console.log(matchResults);
     dropdownItems = matchResults;
     filteredItems = dropdownItems;
     populateDropdown(dropdownItems);
@@ -170,12 +206,10 @@
 
   Mousetrap.bind('enter', function (e) {
     e.preventDefault();
-
-    // Temp. hack to test execution code.
     var obj = pipeline[0];
-    obj.extras.telno = '+14255022351';
-
-    this.nimble.chainPromise(pipeline.slice(1), obj);
+    var sliced = pipeline.slice(1);
+    console.log(sliced);
+    this.nimble.chainPromise(sliced, obj, sliced[0].queryString);
     hideNimbleBar();
     shown = false;
   });
