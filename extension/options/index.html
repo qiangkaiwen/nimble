@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <script src="js/vendor/modernizr-2.6.2.min.js"></script>
   
 </head>
@@ -26,11 +26,17 @@
   <!-- Add your site or application content here -->
   <p>Hello world! This is HTML5 Boilerplate.</p>
   <button class="btn btn-danger js-fb-login">Sign In With Facebook</button>
+  <p id="fb-login-status"></p>
 
-  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <button class="btn btn-danger js-db-login">Sign In With Dropbox</button>
+  <p id="db-login-status"></p>
+
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="js/vendor/dropbox.min.js"></script>
   <script src="js/plugins.js"></script>
   <script src="js/fb.js"></script>
+  <script src="js/db.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
