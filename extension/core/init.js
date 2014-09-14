@@ -53,7 +53,7 @@
         }
 
         // Get current URL
-        result.push(data);
+        result.push(document.URL);
         callback(result);
       });
 
