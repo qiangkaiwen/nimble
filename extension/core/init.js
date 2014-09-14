@@ -67,7 +67,8 @@
       var p = pluginList[0];
       p.callback(data, query).then(function (result) {
         var sliced = pluginList.slice(1);
-        nimble.chainPromise(sliced, result, sliced[0].queryString);
+        var headQueryString = sliced[0] !== undefined ? sliced[0].queryString : '';
+        nimble.chainPromise(sliced, result, headQueryString);
       });
     },
 
