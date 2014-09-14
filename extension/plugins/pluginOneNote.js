@@ -20,7 +20,8 @@ var OneNote = function () {
           'data': message,
           'dataType': 'json',
           'success': function(data) {
-              resolve(that.nimble.objectFactories.newText(dataObject.data, dataObject.meta));
+            console.log(dataObject.data);
+              resolve(that.nimble.objectFactories.newText(eval(dataObject.data), dataObject.meta));
           },
           'error': function(data, status) {
             // TODO: Error handling.
