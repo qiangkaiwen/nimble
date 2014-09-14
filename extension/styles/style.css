@@ -2,11 +2,11 @@
   display: none;
   height: 64px;
   left: 50%;
-  margin-left: -256px;
+  margin-left: -384px;
   margin-top: -32px;
   position: fixed;
   top: 40%;
-  width: 512px;
+  width: 768px;
   z-index: 10000;
 }
 
@@ -16,10 +16,7 @@
 
 #nimble-bar .nimble-input-container {
   background-color: #eee;
-  border: 2px solid #666;
-  border-radius: 4px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  border: 1px solid #ccc;
   -webkit-box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.75);
   box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.75);
@@ -39,11 +36,12 @@
 }
 
 #nimble-bar .nimble-options-container {
-  background-color: #ccc;
-  border: 1px solid #000;
+  background-color: #fff;
+  border: 1px solid #ccc;
   border-top: none;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
+  box-sizing: border-box;
   float: left;
   max-height: 200px;
   overflow-y: scroll;
@@ -61,13 +59,18 @@
 }
 
 #nimble-bar .nimble-options li.selected {
-  color: red;
-  font-weight: bold;
+  background-color: #93EDC7;
 }
 
 #nimble-bar .nimble-pipeline {
-  background-color: #09c;
-  border: 2px solid #666;
+  
+  background: -webkit-linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* FF3.6+ */
+  background:     -ms-linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* IE10 */
+  background:      -o-linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* Opera 11.10+ */
+  background:         linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* W3C */
+        
+  border: 1px solid #ccc;
   border-bottom: none;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -79,21 +82,40 @@
 }
 
 #nimble-bar .nimble-pipeline li {
+  color: #fff;
   display: inline-block;
   font-size: 14px;
-  font-weight: bold;
   margin: 5px;
 }
 
+#nimble-bar .recipe-icon {
+  border-radius: 4px;
+  float: left;
+  margin-right: 5px;
+  width: 32px;
+}
+
+#nimble-bar .recipe-icon-pipeline {
+  border-radius: 4px;
+  box-shadow: 0px 1px 0px rgba(68, 68, 68, 1);
+  float: right;
+  margin: 0 5px;
+  width: 28px;
+}
+
 #nimble-bar .nimble-pipeline li .pipeline-item {
-  background: #fff;
+  border: 1px solid #fff;
   border-radius: 10px;
   display: inline-block;
   margin-left: 7px;
   padding: 5px;
+  text-shadow: 0px 1px 0px rgba(68, 68, 68, 1);
 }
 
 #nimble-bar .nimble-pipeline li:not(:first-child):before {
   color: #fff;
-  content: '\003E';
+  content: "\279c";
+  font-size: 18px;
+  margin-right: 5px;
+  text-shadow: 0px 1px 0px rgba(68, 68, 68, 1);
 }

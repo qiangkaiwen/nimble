@@ -33,8 +33,19 @@
     selectedOptionIndex = -1;
     _.each(items, function (item) {
       var $nimbleOption = $('<li>');
+      var $img;
+      var $p = $('<p>');
+      if (item.extras.type === 'recipe') {
+        console.log(item.extras.icon)
+        $img = $('<img>', {
+          src: chrome.extension.getURL(item.extras.icon), 
+          class: 'recipe-icon'
+        });
+        $p.append($img);
+      }
       var content = item.extras.title;
-      $nimbleOption.html('<p>' + content + '</p>');
+      $p.append('<span>' + content + '</span>');
+      $nimbleOption.html($p);
       $('.nimble-options').append($nimbleOption);
     })
   }
@@ -140,12 +151,21 @@
     var selectedObj = filteredItems[selectedOptionIndex];
     pipeline.push(selectedObj);
     var $nimblePipelineItem = $('<li>');
-    var content = selectedObj.extras.title;
-    if (content) {
-      $nimblePipelineItem.html('<span class="pipeline-item">' + content + '</span>');
-      $('.nimble-pipeline').append($nimblePipelineItem);
+  
+    var $content;    
+    if (selectedObj.extras.icon) {
+      $content = $('<img>', {
+        src: chrome.extension.getURL(selectedObj.extras.icon), 
+        class: 'recipe-icon-pipeline'
+      });
+    } else {
+      $content = $('<span>', {class: 'pipeline-item'});
+      $content.html(selectedObj.extras.title);
     }
-    
+    $nimblePipelineItem.append($content);
+
+    $('.nimble-pipeline').append($nimblePipelineItem);
+
     var filterCriteria = selectedObj.output !== undefined ?
       selectedObj.output : selectedObj;
     var matchResults = router.matchObject(filterCriteria);
