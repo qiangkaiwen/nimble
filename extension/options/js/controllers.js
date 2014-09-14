@@ -1,7 +1,5 @@
 angular.module('NimbleApp')
   .controller('MainCtrl', ['$scope', function ($scope) {
-    $('.logo').addClass('animated fadeInLeft');
-    $('.caption').addClass('animated fadeInRight');
     var t = 1;
     $('.service-icon').each(function () {
       var that = this;

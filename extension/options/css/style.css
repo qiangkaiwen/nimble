@@ -15,18 +15,24 @@ body {
   text-align: center;
 }
 
+.heading a:hover {
+  text-decoration: none;
+}
+
 .banner {   
   background: -webkit-linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* Chrome 10+, Saf5.1+ */
   background:    -moz-linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* FF3.6+ */
   background:     -ms-linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* IE10 */
   background:      -o-linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* Opera 11.10+ */
   background:         linear-gradient(90deg, #1CD8D2 10%, #93EDC7 90%); /* W3C */
-  height: 400px;
+  height: 100%;
+  padding: 50px;
   text-align: center;
 }
 
 .page-banner {
   height: 100px;
+  padding: 20px;
   text-align: left;
 }
 
@@ -39,7 +45,9 @@ body {
 
 .caption {
   color: #fff;
+  letter-spacing: 5px;
   margin-bottom: 30px;
+  text-transform: uppercase;
 }
 
 .landing-content {
@@ -47,7 +55,10 @@ body {
 }
 
 .integration-platforms {
-  padding: 0;
+  background: rgba(255,255,255,0.6);
+  border-radius: 30px;
+  margin: 30px;
+  padding: 30px;
 }
 
 .integration-platforms li {
@@ -85,4 +96,12 @@ body {
 
 .media-heading {
   color: #1CD8D2;
+}
+
+.login-status {
+  display: none;
+}
+
+.login-status.shown {
+  display: inherit;
 }
