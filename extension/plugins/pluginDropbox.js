@@ -28,6 +28,7 @@ var PluginDropbox = function() {
           'extras': {
             'title': 'Save to Dropbox'
           },
+          'queryPattern': /save to dropbox/,
           callback: saveToPublic,
           inputs: [
             {

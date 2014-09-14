@@ -36,6 +36,7 @@ var PluginFacebook = function() {
           'extras': {
             'title': 'Publish Facebook status'
           },
+          'queryPattern': /publish facebook status/,
           'callback': publishStatus,
           'inputs': [
             {

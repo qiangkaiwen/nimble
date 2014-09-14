@@ -72,7 +72,8 @@
       }
       var input = $('.nimble-input').val();
       filteredItems = _.filter(dropdownItems, function (text) {
-        return text.extras.title.toLowerCase().indexOf(input) > -1;
+        return text.queryPattern.test(input.toLowerCase())
+        || text.extras.title.toLowerCase().indexOf(input) > -1;
       });
       if (filteredItems.length > 0) {
         populateDropdown(filteredItems);
@@ -111,7 +112,7 @@
 
   function updateInputQueryString () {
     var selectedItem = filteredItems[selectedOptionIndex];
-    if (selectedItem && selectedItem.extras && selectedItem.title) {
+    if (selectedItem && 'extras' in selectedItem && 'title' in selectedItem.extras) {
       $('.nimble-input').val(selectedItem.extras.title);
     }
   }
@@ -155,6 +156,11 @@
 
   Mousetrap.bind('enter', function (e) {
     e.preventDefault();
+    var obj = pipeline[0];
+    obj.extras.telno = '+14255022351';
+    this.nimble.chainPromise(pipeline.slice(1), obj);
+    hideNimbleBar();
+    shown = false;  
   });
 
   initialize();
