@@ -50,6 +50,8 @@
         dropdownItems = data;
         filteredItems = dropdownItems;
         populateDropdown(dropdownItems);
+        selectedOptionIndex = 0;
+        highlightSelectedItem(selectedOptionIndex);
       });
     }, 750);
   }
@@ -77,14 +79,16 @@
       });
       if (filteredItems.length > 0) {
         populateDropdown(filteredItems);
+        selectedOptionIndex = 0;
+        highlightSelectedItem(selectedOptionIndex);
       } else {
         populateDropdown([{
           extras: {
             title: 'No results found'
           }
         }]);
+        selectedOptionIndex = -1;
       }
-      selectedOptionIndex = -1;
     });
   }
 
