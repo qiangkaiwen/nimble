@@ -1,5 +1,11 @@
 (function () {
   
+  var dropdownItems;
+  var filteredItems;
+  var selectedOptionIndex;
+  var shown = false;
+  var pipeline;
+
   var template = chrome.extension.getURL('bar.html');
   $.ajax({
     url: template,
@@ -9,15 +15,17 @@
       $('body').append(nimbleBar);
       window.nimbleBar = nimbleBar;
       bindInputDropdown();
+
+      $('.nimble-options').on('click', 'li', function (e) {
+        var index = $('.nimble-options li').index($(this));
+        selectedOptionIndex = index;
+        console.log(selectedOptionIndex);
+        selectOption();
+        return false;
+      });
     }
   });
 
-  var dropdownItems;
-  var filteredItems;
-  var selectedOptionIndex;
-  var shown = false;
-  var pipeline;
-  
   function initialize () {
     dropdownItems = [];
     filteredItems = [];
@@ -25,7 +33,6 @@
     pipeline = [];
     $('.nimble-pipeline').html('');
     $('.nimble-options').html('');
-    console.log('initialize')
   }
 
   function populateDropdown (items) {
@@ -95,6 +102,7 @@
       } else {
         populateDropdown([{
           meta: {
+            icon: 'nil.png',
             title: 'No results found',
             value: 'Try another query'
           }
@@ -138,6 +146,7 @@
     var options = document.querySelectorAll('.nimble-options li');
     $(options).removeClass('selected');
     $(options[index]).addClass('selected');
+    $(options[index]).get(0).scrollIntoView(false);
   }
 
   function updateInputQueryString () {
@@ -151,6 +160,7 @@
 
   Mousetrap.bind('down', function (e) {
     if (shown) {
+      e.preventDefault();
       selectedOptionIndex++;
       highlightSelectedItem(selectedOptionIndex);
       updateInputQueryString();
@@ -159,6 +169,7 @@
 
   Mousetrap.bind('up', function (e) {
     if (shown) {
+      e.preventDefault();
       selectedOptionIndex--;
       selectedOptionIndex = Math.max(selectedOptionIndex, 0);
       highlightSelectedItem(selectedOptionIndex);
@@ -166,8 +177,7 @@
     }
   });
 
-  Mousetrap.bind('tab', function (e) {
-    e.preventDefault();
+  function selectOption () {
     var selectedObj = $.extend(true, {}, filteredItems[selectedOptionIndex]);
 
     // Hack to inject required metadata into recipe.
@@ -180,7 +190,8 @@
     pipeline.push(selectedObj);
     var $nimblePipelineItem = $('<li>');
   
-    var $content;    
+    var $content;
+    console.log(selectedObj);
     if (selectedObj.meta.icon) {
       $content = $('<img>', {
         src: chrome.extension.getURL(selectedObj.meta.icon), 
@@ -202,6 +213,11 @@
     dropdownItems = matchResults;
     filteredItems = dropdownItems;
     populateDropdown(dropdownItems);
+  }
+
+  Mousetrap.bind('tab', function (e) {
+    e.preventDefault();
+    selectOption();
   });
 
   Mousetrap.bind('enter', function (e) {
