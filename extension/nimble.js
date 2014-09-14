@@ -111,8 +111,9 @@
 
   function updateInputQueryString () {
     var selectedItem = filteredItems[selectedOptionIndex];
-    $('.nimble-input').val(selectedItem.extras.title);
-
+    if (selectedItem && selectedItem.extras && selectedItem.title) {
+      $('.nimble-input').val(selectedItem.extras.title);
+    }
   }
 
   Mousetrap.bind('down', function (e) {
