@@ -5,7 +5,7 @@ var Twilio = function() {
   var api_secret = '87e5302709aad6ab49de505cd29c244c';
   var api_from = '+13603287227';
 
-  var sendMessage = function(dataObject) {
+  var sendMessage = function(dataObject, queryString) {
     if (dataObject.extras.telno === undefined) {
       console.log('Error: Twilio object didn\'t contain \'telno\'.');
       return;
@@ -59,9 +59,7 @@ var Twilio = function() {
             'type': '"text"',
             'length': '160'
           },
-          'requires': [
-            'telno'
-          ]
+          'extractQueryString': true
         }
       ];
     }

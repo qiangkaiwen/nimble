@@ -138,6 +138,13 @@
     e.preventDefault();
     $('.nimble-input').val('');
     var selectedObj = filteredItems[selectedOptionIndex];
+    console.log(selectedObj);
+
+    if (selectedObj.extractQueryString) {
+      selectedObj.queryString = $('.nimble-input').val();  // TODO:
+      console.log(selectedObj);
+    }
+
     pipeline.push(selectedObj);
     var $nimblePipelineItem = $('<li>');
     var content = selectedObj.extras.title;
