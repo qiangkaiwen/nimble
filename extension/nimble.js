@@ -143,7 +143,8 @@
     //   }
     // };
 
-    var filterCriteria = selectedObj.output !== undefined ? selectedObj.output : selectedObj;
+    var filterCriteria = selectedObj.output !== undefined ?
+      selectedObj.output : selectedObj;
     var matchResults = router.matchObject(filterCriteria);
     dropdownItems = matchResults;
     filteredItems = dropdownItems;
