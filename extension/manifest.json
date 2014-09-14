@@ -69,6 +69,7 @@
     "plugins/dropbox-icon.png",
     "plugins/facebook-icon.png",
     "plugins/google-icon.png",
-    "plugins/twilio-icon.png"
+    "plugins/twilio-icon.png",
+    "plugins/pastebin-icon.png"
   ]
 }
