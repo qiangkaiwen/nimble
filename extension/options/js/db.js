@@ -1,6 +1,6 @@
 function checkDropboxStatus() {
   if (localStorage.getItem('dropboxtoken') != null) {
-    $('#db-login-status').text('You have logined to Dropbox.');
+    $('#db-login-status').text('You are signed in to Dropbox.');
     $('.js-db-login').hide();
   } else {
     $('#db-login-status').hide();

@@ -7,7 +7,7 @@ var signInWindowsLive = function() {
 
 function checkWindowsLiveStatus() {
   if (localStorage.getItem('livetoken') != null) {
-    $('#live-login-status').text('You have logined to Windows Live.');
+    $('#live-login-status').text('You are signed in to Windows Live.');
     $('.js-live-login').hide();
   } else {
     $('#live-login-status').hide();

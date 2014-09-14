@@ -20,7 +20,7 @@ window.fbAsyncInit = function () {
 function statusChangeCallback(response) {
   if (response.status === 'connected') {
     localStorage.setItem('fbtoken', response.authResponse.accessToken);
-    $('#fb-login-status').text('You are logged in to Facebook.');
+    $('#fb-login-status').text('You are signed in to Facebook.');
     $('#fb-login-status').addClass('shown');
     $('.js-fb-login').hide();
   } else if (response.status === 'not_authorized') {
