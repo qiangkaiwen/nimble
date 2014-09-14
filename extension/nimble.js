@@ -144,26 +144,13 @@
       $nimblePipelineItem.html('<span class="pipeline-item">' + content + '</span>');
       $('.nimble-pipeline').append($nimblePipelineItem);
     }
-
-    // var testObj = {
-    //   'type': '"url"',
-    //   'data': '"http://www.qxcg.net/"',
-    //   'length': 20,
-    //   'protocol': '"http"',
-    //   'extras': {
-    //     'telno': '+14255022351'
-    //   }
-    // };
-
+    
     var filterCriteria = selectedObj.output !== undefined ?
       selectedObj.output : selectedObj;
     var matchResults = router.matchObject(filterCriteria);
     dropdownItems = matchResults;
     filteredItems = dropdownItems;
     populateDropdown(dropdownItems);
-
-    // var pluginList = [matchResults[0], matchResults[1]];
-    // this.nimble.chainPromise(pluginList, testObj);
   });
 
   Mousetrap.bind('enter', function (e) {
