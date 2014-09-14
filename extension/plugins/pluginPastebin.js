@@ -20,7 +20,6 @@ var Pastebin = function() {
         'data': formData,
         'dataType': 'text',
         'success': function(data) {
-          console.log(data);
           resolve(that.nimble.objectFactories.newUrl(data, dataObject.extras));
         },
         'error': function(data, status) {

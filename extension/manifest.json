@@ -33,6 +33,7 @@
         "core/utils.js",
         "core/factory.js",
         "storage.js",
+        "plugins/pluginBrowser.js",
         "plugins/pluginGoogl.js",
         "plugins/pluginFacebook.js",
         "plugins/pluginDropbox.js",
