@@ -16,7 +16,7 @@ var PluginFacebook = function() {
           },
           'dataType': 'json',
           'success': function(data) {
-              resolve(that.nimble.objectFactories.newText(message, dataObject.meta));
+              resolve(that.nimble.objectFactories.newText(eval(dataObject.data), dataObject.meta));
           },
           'error': function(data, status) {
             // TODO: Error handling.
