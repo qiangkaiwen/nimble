@@ -41,9 +41,10 @@
         }));
 
         // Get domain specific data defaults
-        if (document.URL in dataDefaults) {
-          for (var i = 0; i < dataDefaults[document.URL].length; i++) {
-            var spec = dataDefaults[document.URL][i];
+        var hostname = document.location.hostname
+        if (hostname in dataDefaults) {
+          for (var i = 0; i < dataDefaults[hostname].length; i++) {
+            var spec = dataDefaults[hostname][i];
             var xpathResult = getElementsByXpath(spec.selector);
             if (xpathResult.resultType === XPathResult.UNORDERED_NODE_ITERATOR_TYPE
               || xpathResult.resultType === XPathResult.ORDERED_NODE_ITERATOR_TYPE) {

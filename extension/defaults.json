@@ -1,5 +1,5 @@
 {
-  "https://www.facebook.com/": [
+  "www.facebook.com": [
     {
       "selector": "//*[@class='fwb']//text()",
       "type": "text",
@@ -7,7 +7,7 @@
       "objectFactory": "newText"
     }
   ],
-  "http://techmeme.com/": [
+  "techmeme.com": [
   	{
   		"selector": "string(//*[@class='L4'][1]/a/@href)",
   		"type": "url",
