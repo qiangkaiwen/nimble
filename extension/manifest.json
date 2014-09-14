@@ -72,6 +72,7 @@
     "plugins/google-icon.png",
     "plugins/twilio-icon.png",
     "plugins/pastebin-icon.png",
-    "plugins/chrome-icon.png"
+    "plugins/chrome-icon.png",
+    "plugins/onenote-icon.png"
   ]
 }
