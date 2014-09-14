@@ -53,7 +53,7 @@
         }
 
         // Get current URL
-        result.push(document.URL);
+        result.push(nimble.objectFactories.newURL(document.URL));
         callback(result);
       });
 
