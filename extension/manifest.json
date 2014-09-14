@@ -9,8 +9,13 @@
   "permissions": [
     "activeTab",
     "storage",
+    "https://connect.facebook.net/en_US/all.js",
     "http://*/"
   ],
+
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://connect.facebook.net; object-src 'self'",     
+
+  "options_page": "options/index.html",
 
   "content_scripts": [
     {
