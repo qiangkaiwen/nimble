@@ -71,6 +71,7 @@
     "plugins/facebook-icon.png",
     "plugins/google-icon.png",
     "plugins/twilio-icon.png",
-    "plugins/pastebin-icon.png"
+    "plugins/pastebin-icon.png",
+    "plugins/chrome-icon.png"
   ]
 }
