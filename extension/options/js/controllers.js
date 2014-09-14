@@ -17,4 +17,5 @@ angular.module('NimbleApp')
     $('.js-fb-login').click(signInFacebook);
     checkStatus();
     $('.js-db-login').click(signInDropbox);
+    $('.js-live-login').click(signInWindowsLive);
   }]);
