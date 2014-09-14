@@ -1,6 +1,7 @@
 angular.module('NimbleApp', [  
   'ngRoute'
-]).config(['$routeProvider', function ($routeProvider) {
+]).config(['$routeProvider', '$locationProvider', 
+  function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -13,4 +14,5 @@ angular.module('NimbleApp', [
       .otherwise({
         redirectTo: '/'
       });
+    $locationProvider.html5Mode(true);
   }]);
