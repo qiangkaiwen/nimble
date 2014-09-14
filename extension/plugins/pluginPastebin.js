@@ -49,7 +49,8 @@ var Pastebin = function() {
           ],
           'output': {
             'type': '"url"',
-            'length': '30'
+            'length': '30',
+            'protocol': 'http'
           }
         }
       ];
