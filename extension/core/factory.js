@@ -14,7 +14,7 @@
         parser.href = url;
         var proto = parser.protocol.substring(0, parser.protocol.length - 1);
         return {
-          'type': '"null"',
+          'type': '"url"',
           'data': that.nimble.utils.escapeString(url),
           'meta': meta,
           'length': url.length,

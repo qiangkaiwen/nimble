@@ -41,9 +41,10 @@
         }));
 
         // Get domain specific data defaults
-        if (document.URL in dataDefaults) {
-          for (var i = 0; i < dataDefaults[document.URL].length; i++) {
-            var spec = dataDefaults[document.URL][i];
+        var hostname = document.location.hostname
+        if (hostname in dataDefaults) {
+          for (var i = 0; i < dataDefaults[hostname].length; i++) {
+            var spec = dataDefaults[hostname][i];
             var xpathResult = getElementsByXpath(spec.selector);
             if (xpathResult.resultType === XPathResult.UNORDERED_NODE_ITERATOR_TYPE
               || xpathResult.resultType === XPathResult.ORDERED_NODE_ITERATOR_TYPE) {
@@ -79,12 +80,14 @@
       });
 
       dataDefaultsPromise.fail(function (d, textStatus, error) {
-        // TODO
+        // TODO:
         console.log('json failed');
       });
     },
     chainPromise: function (pluginList, data, query) {
-      if (pluginList.length === 0) return;
+      if (pluginList.length === 0) {
+        return;
+      }
       var p = pluginList[0];
       p.callback(data, query).then(function (result) {
         var sliced = pluginList.slice(1);

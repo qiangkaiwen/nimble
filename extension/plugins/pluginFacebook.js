@@ -6,8 +6,7 @@ var PluginFacebook = function() {
     return new Promise(function(resolve, reject) {
       Storage.getInstance().get('fbtoken').then(function(token) {
         var message = escape(eval(dataObject.data));
-        // var token = token;
-        var token = "CAACEdEose0cBAECe6s08tTWp3fk1XXgT5eZAUtSrK3yu5B1rqM5LYhDLDIZCs4sCZC1SKYgsZAyJaERt3Rzc7HesBbPVfBUEfoqBu7SncbaXRtpE3I6dMGN60nNSUj76wXH0LquYoO6ZB4JbkjBiAqKXIFIQLRxMNmv0pUJykWY1bDWgXMqgRuqhEq26OirvRgyZCQj3k5CfietYApsuIXxlkM2UiH3wEZD"
+        var token = token;
         var url = "https://graph.facebook.com/me/feed?" + "access_token=" + token + "&message=" + message;
         $.ajax({
           'type': 'POST',
