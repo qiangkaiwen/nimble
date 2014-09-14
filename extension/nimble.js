@@ -109,10 +109,17 @@
     $(options[index]).addClass('selected');
   }
 
+  function updateInputQueryString () {
+    var selectedItem = filteredItems[selectedOptionIndex];
+    $('.nimble-input').val(selectedItem.extras.title);
+
+  }
+
   Mousetrap.bind('down', function (e) {
     if (shown) {
       selectedOptionIndex++;
       highlightSelectedItem(selectedOptionIndex);
+      updateInputQueryString();
     }
   });
 
@@ -121,6 +128,7 @@
       selectedOptionIndex--;
       selectedOptionIndex = Math.max(selectedOptionIndex, 0);
       highlightSelectedItem(selectedOptionIndex);
+      updateInputQueryString();
     }
   });
 
