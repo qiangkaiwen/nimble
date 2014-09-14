@@ -1,12 +1,12 @@
 var Googl = function() {
+  var that = this;
 
   /* Shortens a given URL.
    */
-  var _shorten = function(dataObject) {
+  var shorten = function(dataObject) {
     var reqBody = {
-      'longUrl': dataObject.data
+      'longUrl': eval(dataObject.data)
     };
-
     return new Promise(function(resolve, reject) {
       $.ajax({
         'type': 'POST',
@@ -17,19 +17,13 @@ var Googl = function() {
         },
         'dataType': 'json',
         'success': function(data) {
-          var retVal = {
-            'type': 'url',
-            'data-serialization': 'text',
-            'data': data.id
-          };
+          var retVal = that.nimble.objectFactories.newUrl(data.id, dataObject.extras);
           resolve(retVal);
         },
         'error': function(data, status) {
           // TODO: Error handling.
           console.log('Error: ' + status);
-          reject({
-            'type': 'null'
-          });
+          reject(that.nimble.objectFactories.newNull());
         }
       });
     });
@@ -39,13 +33,22 @@ var Googl = function() {
     getRecipes: function() {
       return [
         {
-          'title': 'Shorten URL (goo.gl)',
-          'callback': _shorten,
+          'extras': {
+            'title': 'Shorten URL via Googl'
+          },
+          'queryPattern': /shorten/,
+          'callback': shorten,
           'inputs': [
             {
-              'type': 'url'
+              'type': '$ == "url"',
+              'protocol': '["http", "https"].indexOf($) != -1'
             }
-          ]
+          ],
+          'output': {
+            'type': '"url"',
+            'length': '20',
+            'protocol': '"http"'
+          }
         }
       ];
     }

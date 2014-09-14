@@ -9,44 +9,66 @@
 })(this, function () {
   'use strict';
 
-  var newObjectRep = function(type, name, dataSerialization, data) {
+  // Helper functions
+  var newObjectRep = function(type, title, dataSerialization, data) {
     return {
       "type": type,
-      "name": name,
+      "title": title,
       "data-serialization": dataSerialization,
       "data": data,
     };
   };
 
+  var getElementsByXpath = function(path) {
+    return document.evaluate(path, document, null, XPathResult.ANY_TYPE, null);
+  };
+
   return {
     dataDefaultsURL: chrome.extension.getURL('/defaults.json'),
     getData: function (callback) {
+      var nimble = this;
+
       var dataDefaultsPromise = $.getJSON(this.dataDefaultsURL, function (dataDefaults) {
         var result = [];
 
+        // Get text selection if it exists
         var textSelection = window.getSelection();
         if (textSelection.type === "Range") {
           var text = textSelection.getRangeAt(0).toString();
-          result.push(newObjectRep('text', 'Selected text', 'text', text));
+          var data = nimble.objectFactories.newText(text, {'title': 'Selected Text'});
+          result.push(data);
         }
 
+        // Get domain specific data defaults
         if (document.URL in dataDefaults) {
           for (var i = 0; i < dataDefaults[document.URL].length; i++) {
             var spec = dataDefaults[document.URL][i];
-            var elem = $(spec.selector).get(0);
-            if (elem !== undefined) {
-              result.push(elem);
+            var xpathResult = getElementsByXpath(spec.selector);
+            for (var elem = xpathResult.iterateNext(); elem !== null; elem = xpathResult.iterateNext()) {
+              var data = nimble.objectFactories[spec.objectFactory](elem, {'title': spec.title});
+              result.push(data);
             }
             // TODO: Returning a list
           }
         }
-        result.push(newObjectRep('text', 'Current URL', 'text', document.URL));
+
+        // Get current URL
+        result.push(data);
         callback(result);
       });
 
       dataDefaultsPromise.fail(function (d, textStatus, error) {
         // TODO
+        console.log('json failed');
       });
     },
+    chainPromise: function (pluginList, data) {
+      if (pluginList.length === 0) return;
+      var p = pluginList[0];
+      p.callback(data).then(function (result) {
+        nimble.chainPromise(pluginList.slice(1), result);
+      });
+    },
+
   };
 });

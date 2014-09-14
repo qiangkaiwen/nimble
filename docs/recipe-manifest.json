@@ -1,38 +1,26 @@
-/* Recipe manifest.
- * Allows the chrome extension to filter a list of installed recipes for ones
- * compatible with the given data.
- */
+// A recipe.
 {
-  "id": "0",  /* Unique ID */
-  "title": "Example",
+  "title": "Shorten URL (goo.gl)",  // Used in UI (maybe?)
+  "callback": shorten,  // Function that actually executes the recipe.
   "inputs": [
-    /* Always match type first, then match each of the fields in constraints. */
     {
-      "type": "url",
-      "constraints": {
-        /* Exactly matches the following. */
-        "protocol": "http",
-        "hostname": "example.com",
-        "port": "8080"
-      }
-    },
-    {
-      "type": "text",
-      "constraints": {
-        "length": 160,  /* input lte this length */
-        "matches-regex": ".*"
-      }
-    },
-    {
-      "type": "image/*",
-      "constraints": {}
-    },
-    {
-      "type": "binary",
-      "constraints": {}
+      // An object containing a number of constraints.
+      // If a candidate does not contain any of these fields, it doesn't match.
+      // If a candidate contains more fields than the input filter, the extra
+      // fields are ignored.
+      // Otherwise, '$' is replaced by the respective value in the candidate's
+      // respective field, and the entire expression is evaluated.
+      // If all the results evaluate to 'true', the candidate matches.
+      "type": "$ == \"url\"",
+      "protocol": "[\"http\", \"https\"].indexOf($) != -1"  // Note expression
+                                                            // syntax.
     }
   ],
-  "outputs": [
-    "null"  /* Same as input types */
-  ]
+
+  // The symbolic object returned by this recipe.
+  "output": {
+    "type": "\"url\"",
+    "length": "20",
+    "protocol": "\"http\""
+  }
 }
