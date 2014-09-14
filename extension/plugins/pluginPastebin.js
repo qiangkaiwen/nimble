@@ -6,7 +6,6 @@ var Pastebin = function() {
   var apiOption = 'paste';
 
   var submitPaste = function(dataObject) {
-    console.log(dataObject.data);
     var pasteBody = eval(dataObject.data);
     var formData = {
       'api_dev_key': apiKey,
@@ -20,7 +19,7 @@ var Pastebin = function() {
         'data': formData,
         'dataType': 'text',
         'success': function(data) {
-          resolve(that.nimble.objectFactories.newUrl(data, dataObject.extras));
+          resolve(that.nimble.objectFactories.newUrl(data, dataObject.meta));
         },
         'error': function(data, status) {
           // TODO: Error handling.
