@@ -19,10 +19,17 @@ var Pastebin = function() {
         'data': formData,
         'dataType': 'text',
         'success': function(data) {
-          resolve(that.nimble.objectFactories.newUrl(data, dataObject.meta));
+          var candidateUrl = data;
+          if (data.indexOf('http') == 0) {  // data.startsWith('http')
+            resolve(that.nimble.objectFactories.newUrl(data, dataObject.meta));
+          } else {
+            // API error.
+            console.log('Pastebin error: ' + candidateUrl);
+            reject(that.nimble.objectFactories.newNull());
+          }
         },
         'error': function(data, status) {
-          // TODO: Error handling.
+          // Request error.
           console.log('Error: ' + status);
           reject(that.nimble.objectFactories.newNull());
         }
@@ -49,7 +56,8 @@ var Pastebin = function() {
           ],
           'output': {
             'type': '"url"',
-            'length': '30'
+            'length': '30',
+            'protocol': 'http'
           }
         }
       ];

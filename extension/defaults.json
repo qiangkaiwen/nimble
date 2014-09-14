@@ -20,5 +20,13 @@
   		"title": "Top News Headlines",
   		"objectFactory": "newText"
   	}
+  ],
+  "news.ycombinator.com": [
+  	{
+  		"selector": "string(//*[@class='title'][1]/a/@href)",
+  		"type": "url",
+  		"title": "Top News URL",
+  		"objectFactory": "newUrl"
+  	}
   ]
 }
