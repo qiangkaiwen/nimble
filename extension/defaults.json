@@ -3,8 +3,22 @@
     {
       "selector": "//*[@class='fwb']//text()",
       "type": "text",
-      "title": "Get Post Authors",
+      "title": "Get Post Author",
       "objectFactory": "newText"
     }
+  ],
+  "http://techmeme.com/": [
+  	{
+  		"selector": "string(//*[@class='L4'][1]/a/@href)",
+  		"type": "url",
+  		"title": "Top News URL",
+  		"objectFactory": "newUrl"
+  	},
+  	{
+  		"selector": "string(//*[@class='L4'][1]/a/text())",
+  		"type": "url",
+  		"title": "Top News Headlines",
+  		"objectFactory": "newUrl"
+  	}
   ]
 }

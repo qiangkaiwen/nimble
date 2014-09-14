@@ -10,14 +10,6 @@
   'use strict';
 
   // Helper functions
-  var newObjectRep = function(type, title, dataSerialization, data) {
-    return {
-      "type": type,
-      "title": title,
-      "data-serialization": dataSerialization,
-      "data": data,
-    };
-  };
 
   var getElementsByXpath = function(path) {
     return document.evaluate(path, document, null, XPathResult.ANY_TYPE, null);
@@ -53,14 +45,26 @@
           for (var i = 0; i < dataDefaults[document.URL].length; i++) {
             var spec = dataDefaults[document.URL][i];
             var xpathResult = getElementsByXpath(spec.selector);
-            for (var elem = xpathResult.iterateNext(); elem !== null; elem = xpathResult.iterateNext()) {
-              // console.log(eval(elem), elem)
+            if (xpathResult.resultType === XPathResult.UNORDERED_NODE_ITERATOR_TYPE
+              || xpathResult.resultType === XPathResult.ORDERED_NODE_ITERATOR_TYPE) {
+              for (var elem = xpathResult.iterateNext(); elem !== null; elem = xpathResult.iterateNext()) {
+                // console.log(eval(elem), elem)
+                console.log(nimble.objectFactories);
+                var data = nimble.objectFactories[spec.objectFactory](elem, {
+                  'title': spec.title,
+                  'value': eval(elem).data
+                });
+                result.push(data);
+              }
+            } else if (xpathResult.resultType === XPathResult.STRING_TYPE) {
+              var elem = xpathResult.stringValue;
               var data = nimble.objectFactories[spec.objectFactory](elem, {
-                'title': 'Post Author',
-                'value': eval(elem).data
+                'title': spec.title,
+                'value': elem
               });
               result.push(data);
             }
+            
             // TODO: Returning a list
           }
         }
