@@ -156,11 +156,14 @@
 
   Mousetrap.bind('enter', function (e) {
     e.preventDefault();
+
+    // Temp. hack to test execution code.
     var obj = pipeline[0];
     obj.extras.telno = '+14255022351';
+
     this.nimble.chainPromise(pipeline.slice(1), obj);
     hideNimbleBar();
-    shown = false;  
+    shown = false;
   });
 
   initialize();
