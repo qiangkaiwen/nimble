@@ -26,7 +26,9 @@ var PluginDropbox = function() {
       return [
         {
           'extras': {
-            'title': 'Save to Dropbox'
+            'type': 'recipe',
+            'title': 'Save to Dropbox',
+            'icon': 'plugins/dropbox-icon.png'
           },
           'queryPattern': /save to dropbox/,
           'callback': saveToPublic,
