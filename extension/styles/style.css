@@ -3,6 +3,7 @@
   -moz-box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.75);
   box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.75);
   display: none;
+  font-family: 'Helvetica', sans-serif !important;
   height: 64px;
   left: 50%;
   margin-left: -384px;
@@ -28,6 +29,7 @@
   border: none;
   box-sizing: border-box !important;
   float: left !important;
+  font-family: 'Helvetica', sans-serif !important;
   font-size: 36px;
   height: 100% !important;
   outline: none !important;
@@ -51,10 +53,12 @@
 
 #nimble-bar .nimble-options {
   margin: 0 !important;
+  padding: 0 !important;
 }
 
 #nimble-bar .nimble-options li {
   border-bottom: 1px solid #eee;
+  font-family: 'Helvetica', sans-serif !important;
   font-size: 24px !important;
   list-style: none !important;
   padding: 5px !important;
@@ -67,6 +71,7 @@
 }
 
 #nimble-bar .nimble-options li p {
+  font-family: 'Helvetica', sans-serif !important;
   margin: 0;
   text-align: left;
 }
@@ -90,6 +95,7 @@
   box-sizing: border-box;
   height: 40px;
   margin-left: 0 !important;
+  padding-left: 0 !important;
   position: absolute;
   top: -40px;
   width: 100%;
@@ -98,6 +104,7 @@
 #nimble-bar .nimble-pipeline li {
   color: #fff;
   display: inline-block;
+  font-family: 'Helvetica', sans-serif !important;
   font-size: 14px;
   margin: 5px;
 }
