@@ -11,10 +11,10 @@ var PluginDropbox = function() {
         var path = eval(dataObject.title) + '.' + fileType;
         client.writeFile(path, buffer, {}, function(error, stat) {
           if (null != error) {
-            console.log("Error = " + error);  
+            console.log("Error = " + error);
             reject(that.nimble.objectFactories.newNull());
           } else {
-            resolve(that.nimble.objectFactories.newNull());
+            resolve(that.nimble.objectFactories.newImage(dataObject, dataObject.extras));
           }
         });
       });
@@ -29,14 +29,14 @@ var PluginDropbox = function() {
             'title': 'Save to Dropbox'
           },
           'queryPattern': /save to dropbox/,
-          callback: saveToPublic,
-          inputs: [
+          'callback': saveToPublic,
+          'inputs': [
             {
               'type': '$ == "image"'
             }
           ],
-          output: {
-            'type': '"null"'
+          'output': {
+            'type': '"image"'
           }
         }
       ];
