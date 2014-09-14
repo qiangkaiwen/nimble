@@ -35,9 +35,18 @@
         var textSelection = window.getSelection();
         if (textSelection.type === "Range") {
           var text = textSelection.getRangeAt(0).toString();
-          var data = nimble.objectFactories.newText(text, {'title': 'Selected Text'});
+          var data = nimble.objectFactories.newText(text, {
+            'title': 'Selected Text',
+            'value': text
+          });
           result.push(data);
         }
+
+        // Get current URL
+        result.push(nimble.objectFactories.newUrl(document.URL, {
+          'title': 'Current URL',
+          'value': document.URL
+        }));
 
         // Get domain specific data defaults
         if (document.URL in dataDefaults) {
@@ -45,15 +54,17 @@
             var spec = dataDefaults[document.URL][i];
             var xpathResult = getElementsByXpath(spec.selector);
             for (var elem = xpathResult.iterateNext(); elem !== null; elem = xpathResult.iterateNext()) {
-              var data = nimble.objectFactories[spec.objectFactory](elem, {'title': spec.title});
+              // console.log(eval(elem), elem)
+              var data = nimble.objectFactories[spec.objectFactory](elem, {
+                'title': 'Post Author',
+                'value': eval(elem).data
+              });
               result.push(data);
             }
             // TODO: Returning a list
           }
         }
 
-        // Get current URL
-        result.push(nimble.objectFactories.newUrl(document.URL, {'title': document.title}));
         callback(result);
       });
 

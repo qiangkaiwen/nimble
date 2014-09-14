@@ -1,7 +1,7 @@
 var Twilio = function() {
   var that = this;
 
-  var queryRegex = /sms via twilio(: *(\+[0-9]+))?/i;
+  var queryRegex = /Twilio(: *(\+[0-9]+))?/i;
 
   var api_account = 'AC89f5d0cf0b772464c202dfe604f0b64f';
   var api_secret = '87e5302709aad6ab49de505cd29c244c';
@@ -49,7 +49,8 @@ var Twilio = function() {
         {
           'meta': {
             'type': 'recipe',
-            'title': 'SMS via Twilio',
+            'title': 'Twilio',
+            'value': 'Send SMS to a number',
             'icon': 'plugins/twilio-icon.png'
           },
           'queryPattern': queryRegex,

@@ -25,13 +25,14 @@
       newText: function(text, meta) {
         meta = (typeof meta !== 'undefined' ? meta : {});
         text = ((text instanceof Node) && text.nodeName === '#text') ? text.data : text;
-        return {
+        var textObj = {
           'type': '"text"',
           'data': nimble.utils.escapeString(text),
           'meta': meta,
           'length': text.length,
           'queryPattern': new RegExp(meta.title.toLowerCase()),
-        }
+        };
+        return textObj;
       },
       newImage: function(domImage, meta) {
         meta = (typeof meta !== 'undefined' ? meta : {});

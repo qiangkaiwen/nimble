@@ -27,7 +27,8 @@ var PluginDropbox = function() {
         {
           'meta': {
             'type': 'recipe',
-            'title': 'Save to Dropbox',
+            'title': 'Dropbox',
+            'value': 'Save image to Dropbox',
             'icon': 'plugins/dropbox-icon.png'
           },
           'queryPattern': /save to dropbox/,

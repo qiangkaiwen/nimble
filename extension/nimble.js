@@ -43,8 +43,8 @@
         });
         $p.append($img);
       }
-      var content = item.meta.title;
-      $p.append('<span>' + content + '</span>');
+      $p.append('<span class="nimble-title">' + item.meta.title + '</span>');
+      $p.append('<span class="nimble-value">' + item.meta.value + '</span>');
       $nimbleOption.html($p);
       $('.nimble-options').append($nimbleOption);
     })
@@ -85,8 +85,8 @@
       }
       var input = $('.nimble-input').val();
       filteredItems = _.filter(dropdownItems, function (text) {
-        return text.queryPattern.test(input.toLowerCase())
-        || text.meta.title.toLowerCase().indexOf(input) > -1;
+        return text.queryPattern.test(input.toLowerCase()) || 
+                [text.meta.title, text.meta.value].join(' ').toLowerCase().indexOf(input) > -1;
       });
       if (filteredItems.length > 0) {
         populateDropdown(filteredItems);
@@ -95,7 +95,8 @@
       } else {
         populateDropdown([{
           meta: {
-            title: 'No results found'
+            title: 'No results found',
+            value: 'Try another query'
           }
         }]);
         selectedOptionIndex = -1;
@@ -181,7 +182,9 @@
 
     var filterCriteria = selectedObj.output !== undefined ?
       selectedObj.output : selectedObj;
+    console.log(filterCriteria);
     var matchResults = router.matchObject(filterCriteria);
+    console.log(matchResults);
     dropdownItems = matchResults;
     filteredItems = dropdownItems;
     populateDropdown(dropdownItems);
@@ -191,6 +194,7 @@
     e.preventDefault();
     var obj = pipeline[0];
     var sliced = pipeline.slice(1);
+    console.log(sliced);
     this.nimble.chainPromise(sliced, obj, sliced[0].queryString);
     hideNimbleBar();
     shown = false;

@@ -35,7 +35,8 @@ var Googl = function() {
         {
           'meta': {
             'type': 'recipe',
-            'title': 'Shorten URL via Googl',
+            'title': 'Googl',
+            'value': 'Shorten URL',
             'icon': 'plugins/google-icon.png'
           },
           'queryPattern': /shorten/,

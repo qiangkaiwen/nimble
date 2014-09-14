@@ -35,7 +35,8 @@ var PluginFacebook = function() {
         {
           'meta': {
             'type': 'recipe',
-            'title': 'Publish Facebook status',
+            'title': 'Facebook',
+            'value': 'Share on timeline',
             'icon': 'plugins/facebook-icon.png'
           },
           'queryPattern': /publish facebook status/,
