@@ -18,7 +18,8 @@
           'data': that.nimble.utils.escapeString(url),
           'extras': extras,
           'length': url.length,
-          'protocol': that.nimble.utils.escapeString(proto)
+          'protocol': that.nimble.utils.escapeString(proto),
+          'queryPattern': new RegExp(extras.title.toLowerCase()),
         };
       },
       newText: function(text, extras) {
@@ -28,7 +29,8 @@
           'type': '"text"',
           'data': nimble.utils.escapeString(text),
           'extras': extras,
-          'length': text.length
+          'length': text.length,
+          'queryPattern': new RegExp(extras.title.toLowerCase()),
         }
       },
       newImage: function(domImage, extras) {
@@ -39,7 +41,8 @@
           'data': blob,
           'extras': extras,
           'width': domImage.width,
-          'height': domImage.height
+          'height': domImage.height,
+          'queryPattern': new RegExp(extras.title.toLowerCase()),
         };
       }
     };
