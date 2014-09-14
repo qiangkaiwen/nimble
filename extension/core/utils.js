@@ -52,6 +52,10 @@
       },
       imageTypeFromBlob: function(blob) {
         return blob.type.substring(6);
+      },
+      isNullDataObject: function(dataObject) {
+        var type = eval(dataObject.type);
+        return (type === 'null');
       }
     };
   }

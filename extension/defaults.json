@@ -23,7 +23,7 @@
   ],
   "news.ycombinator.com": [
   	{
-  		"selector": "string(//*[@class='title'][1]/a/@href)",
+  		"selector": "string(//*[@class='title'][2]/a/@href)",
   		"type": "url",
   		"title": "Top News URL",
   		"objectFactory": "newUrl"

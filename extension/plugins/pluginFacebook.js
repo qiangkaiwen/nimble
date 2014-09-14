@@ -42,7 +42,7 @@ var PluginFacebook = function() {
           'callback': publishStatus,
           'inputs': [
             {
-              'type': '$ == "text"'
+              'type': '($ == "text" || $ == "url")'
             }
           ],
           'output': {
