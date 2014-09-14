@@ -128,7 +128,9 @@
   function updateInputQueryString () {
     var selectedItem = filteredItems[selectedOptionIndex];
     if (selectedItem && 'extras' in selectedItem && 'title' in selectedItem.extras) {
-      $('.nimble-input').val(selectedItem.extras.title);
+      var inputPrompt = selectedItem.extractQueryString !== undefined ? ': ' : '';
+      var displayText = selectedItem.extras.title + inputPrompt;
+      $('.nimble-input').val(displayText);
     }
   }
 
