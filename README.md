@@ -1,4 +1,4 @@
-Nimble
+Nimble - Supercharge your productivity
 ======
 
 ## Introduction
